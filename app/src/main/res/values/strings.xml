@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EPoints</string>
+    <string name="text_email">Email</string>
+    <string name="text_password">Set up password</string>
+    <string name="text_firstName">First name</string>
+    <string name="text_lastName">Last name</string>
+    <string name="text_promoCode">Promo code</string>
+    <string name="text_show">SHOW</string>
+    <string name="text_createNewAccount">Create new account</string>
+    <string name="text_alreadyHaveAccount">Already have an account? Sign In</string>
+    <string name="text_createAccount">Create account</string>
 </resources>
