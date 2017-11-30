@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login.LoginActivity">
+
+    <LinearLayout
+        android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/landingimage"
+        android:orientation="vertical">
+
+      <include layout="@layout/toolbar_transparent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/spark"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/epoints"
+                android:id="@+id/image_landing_epoints"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/text_points"
+                android:id="@+id/text_landing_points"
+                android:textColor="@color/colorwhite"
+                android:textSize="@dimen/textsize_L"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/textsize"
+            android:layout_marginRight="@dimen/textsize"
+            android:id="@+id/text_landing_signup_today"
+            android:layout_marginTop="@dimen/layout_margin"
+            android:text="@string/text_50epoints"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/textsize_L"
+            android:gravity="center"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/textsize"
+            android:layout_marginRight="@dimen/textsize"
+            android:text="@string/text_50epoints1"
+            android:gravity="center"
+            android:id="@+id/text_landing_50epoints_onus"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/textsize_L"
+            android:textStyle="italic" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/textsize"
+            android:layout_marginRight="@dimen/textsize"
+            android:layout_marginTop="@dimen/textsize"
+            android:id="@+id/text_landing_firstreward"
+            android:gravity="center"
+            android:text="@string/text_first_reward"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/textsize_S" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_margin_L"
+            android:layout_marginRight="@dimen/layout_margin_L"
+            android:layout_marginBottom="@dimen/layout_margin_L"
+            android:id="@+id/text_landing_250epoints"
+            android:text="@string/text_250epoints"
+            android:textColor="@color/colorwhite"
+            android:gravity="center"
+            android:textSize="@dimen/textsize_S" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/textsize"
+        android:layout_marginRight="@dimen/textsize"
+        android:layout_marginTop="@dimen/hint_padding"
+        android:id="@+id/button_landing_create_account_email"
+        android:background="@drawable/rectangle_button"
+        android:text="@string/text_create_email"
+        android:textColor="@color/colorwhite" />
+
+    <Button
+        android:id="@+id/button_continue_facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/textsize"
+        android:layout_marginRight="@dimen/textsize"
+        android:layout_marginTop="@dimen/layout_margin_S"
+        android:layout_marginBottom="@dimen/layout_margin_S"
+        android:background="@drawable/rectangle_facebook"
+        android:text="@string/text_account_facebook"
+        android:textColor="@color/colorwhite" />
+</LinearLayout>

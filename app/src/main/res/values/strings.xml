@@ -9,4 +9,25 @@
     <string name="text_createNewAccount">Create new account</string>
     <string name="text_alreadyHaveAccount">Already have an account? Sign In</string>
     <string name="text_createAccount">Create account</string>
+    <string name="text_next">Next</string>
+    <string name="text_bycreatingaccount">By creating an account you agree to our</string>
+    <string name="text_privacypolicy"> Privacy Policy </string>
+    <string name="text_and">and</string>
+    <string name="text_confirm">confirm that you have read our</string>
+    <string name="text_termsandconditions">terms and conditions</string>
+    <string name="text_signup">Sign in</string>
+    <string name="text_points">points</string>
+    <string name="text_50epoints">Sign up today and have</string>
+    <string name="text_50epoints1">50 epoints on us!</string>
+    <string name="text_first_reward">you can get your first reward from as little </string>
+    <string name="text_250epoints">as just 250 epoints.</string>
+    <string name="text_create_email">Create an account with email</string>
+    <string name="text_account_facebook">Continue with facebook</string>
+    <string name="text_thankyou">Thank you</string>
+    <string name="text_sent">we have sent you a</string>
+    <string name="text_confirmation">confirmation email to</string>
+    <string name="text_john">john.doe@example.mail</string>
+    <string name="button_checkemail">Check email</string>
+    <string name="text_youjustgot">you just got</string>
+    <string name="text_thankyou_50epoints">50 epoints!</string>
 </resources>
