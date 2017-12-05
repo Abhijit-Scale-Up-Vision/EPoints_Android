@@ -1,38 +1,37 @@
 package com.scaleup.epoints;
 
 
-import com.scaleup.epoints.login.LoginActivityMVP;
-import com.scaleup.epoints.login.LoginActivityPresenter;
-import com.scaleup.epoints.login.User;
+import com.scaleup.epoints.login.signup.SignUpActivityMVP;
+import com.scaleup.epoints.login.signup.SignUpActivityPresenter;
+import com.scaleup.epoints.login.signup.User;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import static org.mockito.Mockito.*;
 
 public class PresenterTests {
 
-    LoginActivityMVP.Model mockLoginModel;
-    LoginActivityMVP.View mockView;
-    LoginActivityPresenter presenter;
+    SignUpActivityMVP.Model mockLoginModel;
+    SignUpActivityMVP.View mockView;
+    SignUpActivityPresenter presenter;
     User user;
 
     @Before
     public  void setup(){
 
-        mockLoginModel = mock(LoginActivityMVP.Model.class);
+        mockLoginModel = mock(SignUpActivityMVP.Model.class);
 
         user = new User("Fox", "Mulder", "fox@gmail.com", "mulder");
 
         //when(mockLoginModel.getUser()).thenReturn(user);
 
-        mockView = mock(LoginActivityMVP.View.class);
+        mockView = mock(SignUpActivityMVP.View.class);
 
-        presenter = new LoginActivityPresenter(mockLoginModel);
+        presenter = new SignUpActivityPresenter(mockLoginModel);
 
         presenter.setView(mockView);
 

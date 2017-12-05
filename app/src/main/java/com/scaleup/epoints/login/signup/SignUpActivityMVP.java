@@ -1,6 +1,6 @@
-package com.scaleup.epoints.login;
+package com.scaleup.epoints.login.signup;
 
-public interface LoginActivityMVP {
+public interface SignUpActivityMVP {
 
     interface View{
 
@@ -29,6 +29,14 @@ public interface LoginActivityMVP {
         void showUserSavedMessage();
 
         boolean validate();
+
+        void signUpUser();
+
+        void checkOutEmail();
+
+        void slideUp();
+
+        void clearText();
     }
 
     interface Presenter {

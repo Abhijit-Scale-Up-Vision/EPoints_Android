@@ -1,20 +1,19 @@
-package com.scaleup.epoints.login;
+package com.scaleup.epoints.login.signup;
 
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
-public class LoginActivityPresenter implements LoginActivityMVP.Presenter {
+public class SignUpActivityPresenter implements SignUpActivityMVP.Presenter {
 
     @Nullable
-    private LoginActivityMVP.View view;
-    private LoginActivityMVP.Model model;
+    private SignUpActivityMVP.View view;
+    private SignUpActivityMVP.Model model;
 
-    public LoginActivityPresenter(LoginActivityMVP.Model model) {
+    public SignUpActivityPresenter(SignUpActivityMVP.Model model) {
         this.model = model;
     }
 
     @Override
-    public void setView(LoginActivityMVP.View view) {
+    public void setView(SignUpActivityMVP.View view) {
 
         this.view = view;
 
@@ -33,7 +32,8 @@ public class LoginActivityPresenter implements LoginActivityMVP.Presenter {
                 else{
                     //onSignupSuccess();
                     model.createUser(view.getFirstName(), view.getLastName(), view.getEmail(), view.getPassword());
-                    view.showUserSavedMessage();
+                    //view.showUserSavedMessage();
+                    view.signUpUser();
                 }
 
             //}

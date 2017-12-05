@@ -1,6 +1,6 @@
-package com.scaleup.epoints.login;
+package com.scaleup.epoints.login.signup;
 
-public class MemoryRepository implements LoginRepository {
+public class MemoryRepository implements SignUpRepository {
 
     private User user;
 
@@ -8,7 +8,7 @@ public class MemoryRepository implements LoginRepository {
     public User getUser() {
 
         if (user == null) {
-            User user = new User("Fox", "Mulder", "fox@gmail.com", "mulder");
+            User user = new User("", "", "", "");
             user.setId(0);
             return user;
         } else {

@@ -1,4 +1,6 @@
-package com.scaleup.epoints.http;
+package com.scaleup.epoints.http.apimodule;
+
+import com.scaleup.epoints.http.api.SignUpAPI;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApiModule {
 
-    public final String BASE_URL = "https://www.epoints.com/";
+    public final String BASE_URL = "https://qa.epoints.com/";
 
     @Provides
     public OkHttpClient provideClient() {

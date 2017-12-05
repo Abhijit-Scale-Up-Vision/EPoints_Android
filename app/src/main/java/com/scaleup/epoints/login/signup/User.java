@@ -1,4 +1,4 @@
-package com.scaleup.epoints.login;
+package com.scaleup.epoints.login.signup;
 
 public class User {
 

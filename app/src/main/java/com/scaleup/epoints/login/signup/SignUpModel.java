@@ -1,11 +1,11 @@
-package com.scaleup.epoints.login;
+package com.scaleup.epoints.login.signup;
 
-public class LoginModel implements LoginActivityMVP.Model {
+public class SignUpModel implements SignUpActivityMVP.Model {
 
 
-    private LoginRepository repository;
+    private SignUpRepository repository;
 
-    public LoginModel(LoginRepository repository) {
+    public SignUpModel(SignUpRepository repository) {
         this.repository = repository;
     }
 
