@@ -5,9 +5,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_weight="0.7"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/layout_margin"
         android:background="@drawable/spark"
         android:gravity="center">
@@ -25,6 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_weight="0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/textsize"
@@ -51,7 +52,7 @@
             android:fontFamily="@font/system_san_francisco_display_regular"/>
 
         <TextView
-            android:id="@+id/textView_emailView"
+            android:id="@+id/textView_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -85,6 +86,7 @@
         android:textSize="@dimen/textsize_M" />
 
     <LinearLayout
+        android:layout_weight="0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/hint_padding"

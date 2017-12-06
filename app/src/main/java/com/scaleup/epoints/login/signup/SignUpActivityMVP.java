@@ -37,6 +37,8 @@ public interface SignUpActivityMVP {
         void slideUp();
 
         void clearText();
+
+        void createDialog();
     }
 
     interface Presenter {

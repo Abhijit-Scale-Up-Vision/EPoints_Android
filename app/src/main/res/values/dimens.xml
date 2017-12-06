@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="layout_height_Micro">0.1dp</dimen>
     <dimen name="layout_height">40dp</dimen>
     <dimen name="layout_height_L">50dp</dimen>
     <dimen name="layout_weight">40dp</dimen>
@@ -13,6 +14,7 @@
     <dimen name="textsizeS">17sp</dimen>
     <dimen name="textsize">20sp</dimen>
     <dimen name="textsize_M">22sp</dimen>
+    <dimen name="textsize_MM">28sp</dimen>
     <dimen name="textsize_L">30sp</dimen>
     <dimen name="textsize_XL">40sp</dimen>
     <dimen name="textsize_S">15sp</dimen>

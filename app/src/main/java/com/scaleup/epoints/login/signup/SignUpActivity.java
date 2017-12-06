@@ -1,12 +1,17 @@
 package com.scaleup.epoints.login.signup;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,11 +37,12 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpActivity extends AppCompatActivity implements SignUpActivityMVP.View {
+public class SignUpActivity extends AppCompatActivity implements SignUpActivityMVP.View, TextWatcher, View.OnFocusChangeListener {
 
     @Inject
     SignUpActivityMVP.Presenter presenter;
@@ -104,6 +110,15 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
 
             }
         });
+
+        email.addTextChangedListener(this);
+        password.addTextChangedListener(this);
+        firstName.addTextChangedListener(this);
+        lastName.addTextChangedListener(this);
+        email.setOnFocusChangeListener(this);
+        password.setOnFocusChangeListener(this);
+        firstName.setOnFocusChangeListener(this);
+        lastName.setOnFocusChangeListener(this);
 
     }
 
@@ -239,7 +254,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
                     checkOutEmail();}
 
                 else if(response.code()==400){
-                    Toast.makeText(SignUpActivity.this, "User already registered.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(SignUpActivity.this, "User already registered.", Toast.LENGTH_SHORT).show();
+                    createDialog();
                 }
             }
 
@@ -280,7 +296,81 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
     }
 
     @Override
+    public void createDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
+
+        View child = getLayoutInflater().inflate(R.layout.dialog_box, null);
+        alertDialogBuilder.setView(child);
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        alertDialog.show();
+
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        boolean valid = true;
+        Pattern pattern;
+        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+
+        if (email.hasFocus()&&(getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches())) {
+            //email.setError("Please enter valid email address");
+            tilEmail.setError(getString(R.string.text_email_error));
+            valid = false;
+
+        }else if(email.hasFocus() && valid){tilEmail.setError(null);
+        signUpUser();}
+       /*   (?=.*[0-9]) a digit must occur at least once
+            (?=.*[a-z]) a lower case letter must occur at least once
+            (?=.*[A-Z]) an upper case letter must occur at least once
+            (?=.*[@#$%^&+=]) a special character must occur at least once
+            (?=\\S+$) no whitespace allowed in the entire string
+            .{8,} at least 8 characters*/
+
+        if (password.hasFocus() && (getPassword().isEmpty() || !pattern.matcher(getPassword()).matches())) {
+            //password.setError("Please enter valid password");
+            tilPassword.setError(getString(R.string.text_password_error));
+            valid = false;
+        }else if(password.hasFocus() && valid){
+            tilPassword.setError(null);
+        }
+        if (firstName.hasFocus()&&(getFirstName().isEmpty())) {
+            //firstName.setError("Please enter firstname");
+            tilFirstName.setError(getString(R.string.text_firstName_error));
+            valid = false;
+        }else if(firstName.hasFocus() && valid){
+            tilFirstName.setError(null);
+        }
+        if (lastName.hasFocus() && (getLastName().isEmpty())) {
+            //lastName.setError("Please enter lastname");
+            tilLastName.setError(getString(R.string.text_lastName_error));
+            valid = false;
+        }else if(lastName.hasFocus() && valid){
+            tilLastName.setError(null);
+        }
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+
     }
 }

@@ -31,7 +31,7 @@ public class ThankYouActivity extends AppCompatActivity implements ThankYouActiv
     @Inject
     SignUpActivityMVP.Presenter presenter_signUp;
 
-    @BindView(R.id.textView_emailView)
+    @BindView(R.id.textView_email)
     TextView textViewEmail;
     @BindView(R.id.button_check_email)
     Button buttonCheckEmail;

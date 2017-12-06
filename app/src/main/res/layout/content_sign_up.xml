@@ -25,8 +25,6 @@
                 android:layout_height="@dimen/layout_height"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                tools:layout_editor_absoluteX="24dp"
-                tools:layout_editor_absoluteY="36dp"
                 android:background="@drawable/rounded_edittext"
                 android:singleLine="true"
                 android:fontFamily="@font/system_san_francisco_display_regular"
@@ -45,7 +43,7 @@
                     app:errorEnabled="true"
                     android:hint="@string/text_password"
                     app:counterTextAppearance="@style/AppTheme_Custom"
-                    android:layout_marginTop="@dimen/layout_margin">
+                    >
                 <EditText
                     android:gravity="center_vertical"
                     android:id="@+id/editText_password"
@@ -53,11 +51,9 @@
                     android:layout_height="@dimen/layout_height"
                     android:ems="10"
                     android:inputType="textPassword"
-                    tools:layout_editor_absoluteX="24dp"
-                    tools:layout_editor_absoluteY="36dp"
+
                     android:paddingLeft="@dimen/hint_padding"
                     android:singleLine="true"
-                    android:layout_weight="0.2"
                     android:fontFamily="@font/system_san_francisco_display_regular"
                     android:background="@drawable/rounded_edittext"
                     android:backgroundTint="@color/color"/>
@@ -69,20 +65,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                android:hint="@string/text_firstName"
-                android:layout_marginTop="@dimen/layout_margin">
+                android:hint="@string/text_firstName">
+
             <EditText
                 android:id="@+id/editText_firstName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_height"
                 android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="24dp"
-                tools:layout_editor_absoluteY="36dp"
-                android:ems="10"
+
                 android:background="@drawable/rounded_edittext"
-                android:layout_weight="0.2"
+
                 android:fontFamily="@font/system_san_francisco_display_regular"
                 android:singleLine="true"
+                android:maxLength="50"
                 android:backgroundTint="@color/color"
                 android:paddingLeft="@dimen/hint_padding"/>
 
@@ -94,18 +89,16 @@
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:hint="@string/text_lastName"
-                android:layout_marginTop="@dimen/layout_margin"
                 >
             <EditText
                 android:id="@+id/editText_lastName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_height"
                 android:inputType="textPersonName"
-                tools:layout_editor_absoluteX="24dp"
-                tools:layout_editor_absoluteY="36dp"
-                android:ems="10"
+
+
+                android:maxLength="50"
                 android:background="@drawable/rounded_edittext"
-                android:layout_weight="0.2"
                 android:singleLine="true"
                 android:fontFamily="@font/system_san_francisco_display_regular"
                 android:backgroundTint="@color/color"

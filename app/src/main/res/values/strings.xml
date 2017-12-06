@@ -33,8 +33,10 @@
     <string name="title_activity_thank_you">ThankYouActivity</string>
     <string name="title_activity_landing">LandingActivity</string>
     <string name="text_signIn">Sign in</string>
-    <string name="text_email_error">Please enter valid email address</string>
-    <string name="text_password_error">Please enter valid password</string>
+    <string name="text_email_error">Invalid email address(abc@xyz.com)</string>
+    <string name="text_password_error">Invalid password(Abc@$#123,Min=8,Max=15)</string>
     <string name="text_firstName_error">Please enter firstname</string>
     <string name="text_lastName_error">Please enter lastname</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_usedEmail">Email is already in use</string>
 </resources>

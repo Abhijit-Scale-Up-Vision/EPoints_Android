@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:theme="@style/AppTheme_Custom"
         android:fitsSystemWindows="true"
-        android:background="@drawable/thankyou">
+        android:background="@drawable/img_thankyou">
         <include layout="@layout/toolbar_transparent"/>
         <include layout="@layout/content_thank_you"/>
     </android.support.design.widget.AppBarLayout>
