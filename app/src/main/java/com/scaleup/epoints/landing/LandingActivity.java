@@ -31,6 +31,9 @@ public class LandingActivity extends AppCompatActivity implements LandingActivit
     @Inject
     LandingActivityMVP.Presenter presenter;
 
+    @BindView(R.id.toolbar_title)
+    TextView toobarTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,10 @@ public class LandingActivity extends AppCompatActivity implements LandingActivit
         ((App) getApplication()).getComponent().inject(this);
 
         ButterKnife.bind(this);
+
+        toobarTitle.setText(getString(R.string.text_signIn));
+        toobarTitle.setGravity(View.TEXT_ALIGNMENT_VIEW_END);
+
 
         buttonCreateAccountEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +72,12 @@ public class LandingActivity extends AppCompatActivity implements LandingActivit
         presenter.setView(this);
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
-    }
+    }*/
 
     @Override
     public void gotoSignUp() {

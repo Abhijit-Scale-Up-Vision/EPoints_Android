@@ -8,10 +8,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
+        android:layout_marginEnd="@dimen/layout_margin"
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:layout_gravity="center"
-        android:textStyle="italic"/>
+        android:layout_gravity="end"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:layout_marginRight="@dimen/layout_margin" />
 </android.support.v7.widget.Toolbar>

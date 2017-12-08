@@ -6,9 +6,9 @@
 
     <LinearLayout
         android:layout_weight="1"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/layout_margin_XL"
         android:background="@drawable/spark"
         android:gravity="center">
 
@@ -19,9 +19,9 @@
             android:gravity="center"
             android:text="@string/text_thankyou"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/textsize_XL"
+            android:textSize="@dimen/textsize_XXL"
             android:textStyle="italic"
-            android:fontFamily="@font/good_karma_demo"/>
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -70,6 +70,7 @@
         android:layout_marginTop="@dimen/textsize_L"
         android:background="@drawable/rectangle_button"
         android:padding="@dimen/textsizeS"
+        android:textAllCaps="false"
         android:text="@string/button_checkemail"
         android:textColor="@color/colorwhite"
         android:textSize="@dimen/textsize" />
@@ -106,9 +107,9 @@
             android:layout_marginLeft="@dimen/hint_padding"
             android:text="@string/text_thankyou_50epoints"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/textsize_XL"
-            android:textStyle="italic"
-            android:fontFamily="@font/good_karma_demo"/>
+            android:textSize="@dimen/textsize_XXL_M"
+
+            />
     </LinearLayout>
 
     <ImageView

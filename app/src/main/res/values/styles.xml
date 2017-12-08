@@ -31,11 +31,17 @@
         <item name="android:textColor">@color/colorwhite</item>
         <item name="android:textColorPrimary">@color/colorwhite</item>
         <item name="android:actionMenuTextColor">@color/colorwhite</item>
+        <item name="android:itemTextAppearance">@style/myCustomMenuTextApearance</item>
+
 
     </style>
 
     <style name="AppTheme_Custom.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme_Custom.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="myCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
 </resources>

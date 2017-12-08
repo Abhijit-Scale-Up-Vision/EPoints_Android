@@ -22,13 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.signup.SignUpActivity"
-            android:theme="@style/AppTheme_Custom"/>
+        <activity
+            android:name=".login.signup.SignUpActivity"
+            android:theme="@style/AppTheme_Custom" />
         <activity
             android:name=".thankyou.ThankYouActivity"
             android:label=""
             android:theme="@style/AppTheme_Custom_transparent" />
-
+        <activity android:name=".login.signup.privacypolicy.PrivacyPolicyActivity"
+            android:label="Privacy Policy"
+            android:theme="@style/Theme.AppCompat"></activity>
     </application>
 
 </manifest>

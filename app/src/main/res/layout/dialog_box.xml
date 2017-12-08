@@ -29,6 +29,7 @@
         android:layout_height="@dimen/layout_height_Micro"
         android:background="@android:color/darker_gray"/>
     <TextView
+        android:id="@+id/dialog_cancel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_height"
         android:textSize="@dimen/textsize_S"

@@ -2,6 +2,7 @@ package com.scaleup.epoints.login.signup;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,6 +34,7 @@ import com.google.firebase.crash.FirebaseCrash;
 import com.scaleup.epoints.R;
 import com.scaleup.epoints.http.api.SignUpAPI;
 import com.scaleup.epoints.http.apimodel.ResultStatus;
+import com.scaleup.epoints.login.signup.privacypolicy.PrivacyPolicyActivity;
 import com.scaleup.epoints.root.App;
 import com.scaleup.epoints.thankyou.ThankYouActivity;
 
@@ -42,7 +50,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpActivity extends AppCompatActivity implements SignUpActivityMVP.View, TextWatcher, View.OnFocusChangeListener {
+public class SignUpActivity extends AppCompatActivity implements SignUpActivityMVP.View, TextWatcher, View.OnFocusChangeListener, View.OnClickListener {
+
+    private int startIndex = 32;
+    private int lastIndex = 44;
+    private int startIndex2 = 24;
+    private int lastIndex2 = 40;
+    private AlertDialog alertDialog;
+    private TextView cancelDialog;
 
     @Inject
     SignUpActivityMVP.Presenter presenter;
@@ -75,6 +90,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
     TextInputLayout tilLastName;
     @BindView(R.id.linearLayout_signUp)
     LinearLayout linearLayoutSignUp;
+    /*@BindView(R.id.dialog_cancel)
+    TextView cancel;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +105,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
         slideUp();
 
         privacy.setText(Html.fromHtml(getString(R.string.text_privacy)));
+        //clickableText();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
@@ -119,6 +137,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
         password.setOnFocusChangeListener(this);
         firstName.setOnFocusChangeListener(this);
         lastName.setOnFocusChangeListener(this);
+        privacy.setOnClickListener(this);
 
     }
 
@@ -127,6 +146,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
         super.onResume();
         presenter.setView(this);
         presenter.getCurrentUser();
+        email.requestFocus();
         clearText();
     }
 
@@ -168,7 +188,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
 
     @Override
     public void validationError() {
-        Toast.makeText(this,"Signup has failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Signup has failed", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -201,10 +221,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
         boolean valid = true;
         Pattern pattern;
 
-        tilEmail.setError(null);
-        tilPassword.setError(null);
-        tilFirstName.setError(null);
-        tilLastName.setError(null);
+        removeError();
         if (getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
             //email.setError("Please enter valid email address");
             tilEmail.setError(getString(R.string.text_email_error));
@@ -267,6 +284,32 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
     }
 
     @Override
+    public void verifyExistingUser() {
+        // simplified call to request the news with already initialized service
+        Call<ResultStatus> call = signUpAPI.alreadyRegisterUser(getEmail());
+        call.enqueue(new Callback<ResultStatus>() {
+            @Override
+            public void onResponse(Call<ResultStatus> call, Response<ResultStatus> response) {
+
+                if(response.isSuccessful()){
+                    Toast.makeText(SignUpActivity.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                    checkOutEmail();}
+
+                else if(response.code()==400){
+                    // Toast.makeText(SignUpActivity.this, "User already registered.", Toast.LENGTH_SHORT).show();
+                    clearText();
+                    createDialog();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultStatus> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    @Override
     public void checkOutEmail() {
         Intent intent = new Intent(SignUpActivity.this, ThankYouActivity.class);
         intent.putExtra("email",getEmail());
@@ -293,6 +336,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
         password.getText().clear();
         firstName.getText().clear();
         lastName.getText().clear();
+        email.requestFocus();
+        removeError();
     }
 
     @Override
@@ -300,13 +345,73 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
 
         View child = getLayoutInflater().inflate(R.layout.dialog_box, null);
+        //ButterKnife.bind(this,child);
+        cancelDialog = ButterKnife.findById(child, R.id.dialog_cancel);
         alertDialogBuilder.setView(child);
 
-        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog = alertDialogBuilder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         alertDialog.show();
+        cancelDialog.setOnClickListener(this);
 
+    }
+
+    @Override
+    public void clickableText() {
+        SpannableString privacyString = new SpannableString(getString(R.string.text_privacy1));
+
+        ClickableSpan clickableSpanPrivacyString = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                gotoPrivacy();
+            }
+        };
+        SpannableString tocString = new SpannableString(getString(R.string.text_toc));
+
+        ClickableSpan clickableSpanTocString = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                gotoPrivacy();
+            }
+        };
+
+        //For Click
+        privacyString.setSpan(clickableSpanPrivacyString,startIndex,lastIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        //For UnderLine
+        privacyString.setSpan(new UnderlineSpan(),startIndex,lastIndex,0);
+
+        //For Bold
+        privacyString.setSpan(new StyleSpan(Typeface.BOLD),startIndex,lastIndex,0);
+
+        //For Click
+        tocString.setSpan(clickableSpanTocString,startIndex2,lastIndex2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        //For UnderLine
+        tocString.setSpan(new UnderlineSpan(),startIndex2,lastIndex2,0);
+
+        //For Bold
+        tocString.setSpan(new StyleSpan(Typeface.BOLD),startIndex2,lastIndex2,0);
+
+        //Finally you can set to textView.
+
+        privacy.setText(privacyString +""+tocString);
+        privacy.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    @Override
+    public void gotoPrivacy() {
+        Intent intent = new Intent(SignUpActivity.this, PrivacyPolicyActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void removeError() {
+        tilEmail.setError(null);
+        tilPassword.setError(null);
+        tilFirstName.setError(null);
+        tilLastName.setError(null);
     }
 
     @Override
@@ -331,8 +436,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
             tilEmail.setError(getString(R.string.text_email_error));
             valid = false;
 
-        }else if(email.hasFocus() && valid){tilEmail.setError(null);
-        signUpUser();}
+        }else if(email.hasFocus() && valid){tilEmail.setError(null); /*verifyExistingUser();*/}
+
        /*   (?=.*[0-9]) a digit must occur at least once
             (?=.*[a-z]) a lower case letter must occur at least once
             (?=.*[A-Z]) an upper case letter must occur at least once
@@ -372,5 +477,19 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityM
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.textview_privacy:
+                gotoPrivacy();
+                return;
+            case R.id.dialog_cancel:
+                alertDialog.dismiss();
+                clearText();
+                return;
+        }
     }
 }

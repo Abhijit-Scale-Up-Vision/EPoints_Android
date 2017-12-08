@@ -32,6 +32,8 @@ public interface SignUpActivityMVP {
 
         void signUpUser();
 
+        void verifyExistingUser();
+
         void checkOutEmail();
 
         void slideUp();
@@ -39,6 +41,12 @@ public interface SignUpActivityMVP {
         void clearText();
 
         void createDialog();
+
+        void clickableText();
+
+        void gotoPrivacy();
+
+        void removeError();
     }
 
     interface Presenter {

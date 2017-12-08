@@ -5,6 +5,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:layout_weight="0.5"
+        android:layout_margin="@dimen/layout_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -18,7 +19,7 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_margin="@dimen/layout_margin_XXXL"
+                android:layout_margin="@dimen/layout_margin_XXL_M"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -40,7 +41,7 @@
             android:textSize="@dimen/textsize_L"
             android:gravity="center"
             android:textStyle="bold"
-            android:fontFamily="@font/good_karma_demo"/>
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +53,7 @@
             android:textColor="@color/colorwhite"
             android:textSize="@dimen/textsize_L"
             android:textStyle="bold"
-            android:fontFamily="@font/good_karma_demo"/>
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,6 +96,7 @@
             android:background="@drawable/rectangle_button"
             android:text="@string/text_create_email"
             android:textSize="@dimen/textsize_S"
+            android:textAllCaps="false"
             android:fontFamily="@font/system_san_francisco_display_regular"
             android:textColor="@color/colorwhite" />
 
@@ -108,9 +110,10 @@
             android:layout_marginBottom="@dimen/layout_margin_S"
             android:background="@drawable/rectangle_facebook"
             android:drawableLeft="@drawable/icon_fb"
-            android:paddingLeft="40dp"
+            android:paddingLeft="30dp"
             android:paddingRight="40dp"
             android:gravity="center"
+            android:textAllCaps="false"
             android:textAlignment="center"
             android:text="@string/text_account_facebook"
             android:textSize="@dimen/textsize_S"
