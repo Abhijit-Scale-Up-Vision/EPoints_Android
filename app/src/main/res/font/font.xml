@@ -20,4 +20,24 @@
         android:fontStyle="normal"
         android:fontWeight="400"
         android:font="@font/system_san_francisco_display_ultralight" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/good_karma_upright" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/good_karma_caps" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        android:font="@font/good_karma_regular" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/good_karma_wide" />
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/good_karma_wide_upright" />
 </font-family>

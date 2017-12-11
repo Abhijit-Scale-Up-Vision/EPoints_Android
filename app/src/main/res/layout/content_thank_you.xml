@@ -6,8 +6,8 @@
 
     <LinearLayout
         android:layout_weight="1"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/layout_margin_XL"
         android:background="@drawable/spark"
         android:gravity="center">
@@ -18,9 +18,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/text_thankyou"
+            android:layout_marginRight="@dimen/layout_margin"
+            android:layout_marginTop="@dimen/layout_margin_XL"
+            android:layout_marginBottom="@dimen/layout_margin_XL"
+            android:layout_marginLeft="@dimen/layout_margin_XL"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/textsize_XXL"
-            android:textStyle="italic"
+            android:textSize="@dimen/textsize_XL"
+            android:fontFamily="@font/good_karma_regular"
             />
     </LinearLayout>
 
@@ -28,7 +32,7 @@
         android:layout_weight="0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textsize"
+        android:layout_marginTop="@dimen/hint_padding"
         android:orientation="vertical">
 
         <TextView
@@ -80,17 +84,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/hint_padding"
+        android:layout_marginTop="@dimen/hint_padding_L"
         android:text="@string/text_youjustgot"
         android:textColor="@color/colorwhite"
         android:fontFamily="@font/system_san_francisco_display_regular"
         android:textSize="@dimen/textsize_M" />
 
     <LinearLayout
-        android:layout_weight="0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/hint_padding"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -106,17 +108,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/hint_padding"
             android:text="@string/text_thankyou_50epoints"
+            android:fontFamily="@font/good_karma_regular"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/textsize_XXL_M"
-
-            />
+            android:textSize="@dimen/textsize_XL" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageview_snake"
         android:layout_width="200dp"
-        android:layout_height="@dimen/layout_height"
-        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
         android:src="@drawable/snake"
         />
 </LinearLayout>

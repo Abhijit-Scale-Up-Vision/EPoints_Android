@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.scaleup.epoints">
+    package="com.iat.epoints">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,6 +15,7 @@
         <activity
             android:name=".landing.LandingActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/CustomActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +25,22 @@
         </activity>
         <activity
             android:name=".login.signup.SignUpActivity"
-            android:theme="@style/AppTheme_Custom" />
+            android:theme="@style/AppTheme_Custom"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".thankyou.ThankYouActivity"
             android:label=""
-            android:theme="@style/AppTheme_Custom_transparent" />
+            android:theme="@style/AppTheme_Custom_transparent"
+            android:screenOrientation="portrait"/>
         <activity android:name=".login.signup.privacypolicy.PrivacyPolicyActivity"
             android:label="Privacy Policy"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".signIn.signIn.SignInActivity"
+            android:label="Sign in"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme_Custom" />
     </application>
 
 </manifest>

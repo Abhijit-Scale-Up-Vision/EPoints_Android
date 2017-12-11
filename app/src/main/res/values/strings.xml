@@ -42,4 +42,9 @@
     <string name="text_privacy1"><![CDATA[ By creating an account you agree to our <b><font color=#00D264>Privacy Policy</b>]]></string>
     <string name="text_toc"><![CDATA[ and confirm that you read our <b><font color=#00D264> terms and conditions </b>]]></string>
     <string name="text_coming_soon">Coming soon</string>
+    <string name="text_enter_email">Enter email</string>
+    <string name="text_signin_password">Enter password</string>
+    <string name="text_signin_show">show</string>
+    <string name="text_signin">Sign in</string>
+    <string name="text_forget_password">Forgot your Password?</string>
 </resources>
