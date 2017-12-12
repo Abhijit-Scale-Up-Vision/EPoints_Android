@@ -6,7 +6,9 @@ import com.iat.epoints.landing.LandingModule;
 import com.iat.epoints.login.signup.SignUpModule;
 import com.iat.epoints.signIn.signIn.SignInModule;
 import com.iat.epoints.thankyou.ThankYouModule;
-
+/**
+ * Created by Abhijit.
+ */
 
 public class App extends Application {
 
