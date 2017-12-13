@@ -15,19 +15,15 @@ import retrofit2.http.Query;
  * Created by Manikanta .
  */
 
-public interface SignInAPI
-{
+public interface FBLoginAPI {
 
     @Headers("Content-Type: application/json")
     @POST(BuildConfig.SIGN_IN_API)
-    Call<SignInResult> signInUser(@Query("grant_type") String grantType,
-                                  @Query("username") String userName,
-                                  @Query("password") String password,
-                                  @Query("client_id") String client_id,
-                                  @Query("client_secret") String client_secret);
-
-
-
+    Call<SignInResult> signInFBUser(@Query("grant_type") String grantType,
+                                    @Query("access_token") String token,
+                                    @Query("facebook_id") String fbuserID,
+                                    @Query("client_id") String client_id,
+                                    @Query("client_secret") String client_secret);
 
 
     @Headers("Content-Type: application/json")

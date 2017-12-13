@@ -33,12 +33,16 @@
     <string name="title_activity_thank_you">ThankYouActivity</string>
     <string name="title_activity_landing">LandingActivity</string>
     <string name="text_signIn">Sign in</string>
+
+    <string name="resend_link">Resend verification link</string>
     <string name="text_email_error">Invalid email address(abc@xyz.com)</string>
     <string name="text_password_error">Invalid password(Abc@$#123,Min=8,Max=15)</string>
     <string name="text_firstName_error">Please enter firstname</string>
     <string name="text_lastName_error">Please enter lastname</string>
     <string name="text_cancel">Cancel</string>
     <string name="text_usedEmail">Email is already in use</string>
+
+    <string name="account_verfied">This account is not verified</string>
     <string name="text_privacy1"><![CDATA[ By creating an account you agree to our <b><font color=#00D264>Privacy Policy</b>]]></string>
     <string name="text_toc"><![CDATA[ and confirm that you read our <b><font color=#00D264> terms and conditions </b>]]></string>
     <string name="text_coming_soon">Coming soon</string>
@@ -47,4 +51,9 @@
     <string name="text_signin_show">show</string>
     <string name="text_signin">Sign in</string>
     <string name="text_forget_password">Forgot your Password?</string>
+
+
+    <string name="facebook_app_id">722083627987716</string>
+    <string name="fb_login_protocol_scheme">fb722083627987716</string>
+
 </resources>

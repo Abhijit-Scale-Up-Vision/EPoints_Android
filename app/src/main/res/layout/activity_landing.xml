@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".login.signup.SignUpActivity">
-    <android.support.design.widget.AppBarLayout android:layout_width="match_parent"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/AppTheme_Custom"
         android:fitsSystemWindows="true"
-        android:background="@drawable/landingimage">
+        android:background="@drawable/landing_image">
         <include layout="@layout/toolbar_transparent"/>
         <include layout="@layout/content_landing"/>
     </android.support.design.widget.AppBarLayout>

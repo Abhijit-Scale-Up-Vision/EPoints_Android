@@ -26,4 +26,9 @@ public class LandingActivityPresenter implements LandingActivityMVP.Presenter {
     public void signInButtonClicked() {
         view.gotoSignIn();
     }
+
+    @Override
+    public void facebookLoginClicked() {
+        view.gotoFBLogin();
+    }
 }

@@ -1,7 +1,7 @@
 package com.iat.epoints.http.apimodel;
 
 /**
- * Created by USER on 08-12-2017.
+ * Created by Manikanta.
  */
 
 import com.google.gson.annotations.Expose;

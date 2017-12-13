@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout android:layout_weight="0.5"
-        android:layout_margin="@dimen/layout_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_weight="0.5"
         android:orientation="vertical">
 
         <LinearLayout
@@ -15,114 +16,126 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@drawable/spark"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
 
             <ImageView
-                android:layout_marginRight="@dimen/layout_margin_XL"
-                android:layout_marginTop="@dimen/layout_margin_XXL"
-                android:layout_marginBottom="@dimen/layout_margin_XXL"
-                android:layout_marginLeft="@dimen/layout_margin_XXL"
+                android:id="@+id/image_landing_epoints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/logo_epoints"
-                android:id="@+id/image_landing_epoints"/>
+                android:layout_marginBottom="@dimen/layout_margin_XL"
+                android:layout_marginLeft="@dimen/layout_margin_XL"
+                android:layout_marginRight="@dimen/layout_margin_L"
+                android:layout_marginTop="@dimen/layout_margin_XL"
+                android:src="@drawable/logo_epoints" />
 
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/text_landing_signup_today"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/hint_padding"
             android:layout_marginRight="@dimen/hint_padding"
-            android:id="@+id/text_landing_signup_today"
             android:layout_marginTop="@dimen/layout_margin"
+            android:fontFamily="@font/good_karma_regular"
+            android:gravity="center"
             android:text="@string/text_50epoints"
             android:textColor="@color/colorwhite"
             android:textSize="@dimen/textsize_XL"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:fontFamily="@font/good_karma_regular"
-            />
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/text_landing_50epoints_onus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/hint_padding"
             android:layout_marginRight="@dimen/hint_padding"
-            android:text="@string/text_50epoints1"
+            android:fontFamily="@font/good_karma_regular"
             android:gravity="center"
-            android:id="@+id/text_landing_50epoints_onus"
+            android:text="@string/text_50epoints1"
             android:textColor="@color/colorwhite"
             android:textSize="@dimen/textsize_XL"
-            android:textStyle="bold"
-            android:fontFamily="@font/good_karma_regular"
-            />
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/text_landing_firstreward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/hint_padding"
             android:layout_marginRight="@dimen/hint_padding"
             android:layout_marginTop="@dimen/textsize"
-            android:id="@+id/text_landing_firstreward"
+            android:fontFamily="@font/system_san_francisco_display_regular"
             android:gravity="center"
             android:text="@string/text_first_reward"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/textsize_S"
-            android:fontFamily="@font/system_san_francisco_display_regular"/>
+            android:textSize="@dimen/textsize_S" />
+
         <TextView
+            android:id="@+id/text_landing_250epoints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_margin"
             android:layout_marginLeft="@dimen/hint_padding"
             android:layout_marginRight="@dimen/hint_padding"
-            android:layout_marginBottom="@dimen/layout_margin"
-            android:id="@+id/text_landing_250epoints"
+            android:fontFamily="@font/system_san_francisco_display_regular"
+            android:gravity="center"
             android:text="@string/text_250epoints"
             android:textColor="@color/colorwhite"
-            android:gravity="center"
-            android:textSize="@dimen/textsize_S"
-            android:fontFamily="@font/system_san_francisco_display_regular"/>
+            android:textSize="@dimen/textsize_S" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorwhite">
+        android:background="@color/colorwhite"
+        android:orientation="vertical">
+
         <Button
+            android:id="@+id/button_create_account_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/textsize"
             android:layout_marginRight="@dimen/textsize"
             android:layout_marginTop="@dimen/hint_padding"
-            android:id="@+id/button_create_account_email"
             android:background="@drawable/rectangle_button"
-            android:text="@string/text_create_email"
-            android:textSize="@dimen/textsize_S"
-            android:textAllCaps="false"
             android:fontFamily="@font/system_san_francisco_display_regular"
-            android:textColor="@color/colorwhite" />
+            android:text="@string/text_create_email"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/textsize_S" />
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"
+            android:layout_marginBottom="30dp" />
         <Button
             android:id="@+id/button_continue_facebook"
             android:layout_width="match_parent"
+            android:visibility="visible"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/layout_margin_S"
             android:layout_marginLeft="@dimen/textsize"
             android:layout_marginRight="@dimen/textsize"
             android:layout_marginTop="@dimen/layout_margin_S"
-            android:layout_marginBottom="@dimen/layout_margin_S"
             android:background="@drawable/rectangle_facebook"
             android:drawableLeft="@drawable/icon_fb"
+            android:fontFamily="@font/system_san_francisco_display_regular"
+            android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="40dp"
-            android:gravity="center"
-            android:textAllCaps="false"
-            android:textAlignment="center"
             android:text="@string/text_account_facebook"
-            android:textSize="@dimen/textsize_S"
-            android:fontFamily="@font/system_san_francisco_display_regular"
-            android:textColor="@color/colorwhite" />
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/textsize_S" />
     </LinearLayout>
 </LinearLayout>

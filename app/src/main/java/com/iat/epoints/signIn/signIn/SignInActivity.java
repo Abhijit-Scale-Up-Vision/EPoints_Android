@@ -1,5 +1,6 @@
 package com.iat.epoints.signIn.signIn;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
@@ -123,6 +125,10 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                 presenter.loginButtonClicked();
 //                Toast.makeText(getApplicationContext(),"Working fine",Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.dialog_cancel:
+                alertDialog.dismiss();
+                clearText();
+                break;
         }
     }
 
@@ -161,11 +167,25 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
 
                 if (response.isSuccessful())
                 {
-                    Log.i("Res Success",""+response.body().getRegistrationDate());
+                    boolean verifiedVal = response.body().getVerified();
+
+                    if (verifiedVal == false)
+                    {
+                        createDialog();
+//                        Toast.makeText(getApplicationContext(),"Need to Verify Account",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        String email = response.body().getEmail();
+                        String firstName = response.body().getFirstName();
+
+                        gotoDashBoard(email,firstName);
+                    }
                 }
                 else if (response.code() == 202)
                 {
                     Log.i("Res Password",""+response.body());
+                    gotoChangePassword();
                 }
 
             }
@@ -198,6 +218,19 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     {
         boolean valid = true;
         Pattern pattern;
+
+
+        if (TextUtils.isEmpty(getEmail()))
+        {
+            tilEmail.setError("You haven’t entered an Email");
+        }
+
+        else if (TextUtils.isEmpty(getPassword()))
+        {
+            tilPassword.setError("You haven’t entered a Password");
+        }
+
+
 
         removeError();
         if (getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
@@ -265,12 +298,32 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         tilEmail.setError(null);
         tilPassword.setError(null);
     }
+
+    @Override
+    public void gotoDashBoard(String email,String firstName)
+    {
+
+        Intent i = new Intent(SignInActivity.this,DashBoardActivity.class);
+        i.putExtra("Email",email);
+        i.putExtra("fName",firstName);
+        startActivity(i);
+
+
+    }
+
+    @Override
+    public void gotoChangePassword() {
+
+        startActivity(new Intent(getApplicationContext(),ChangePasswordActivity.class));
+
+    }
+
     @Override
     public void createDialog() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignInActivity.this);
 
-        View child = getLayoutInflater().inflate(R.layout.dialog_box, null);
+        View child = getLayoutInflater().inflate(R.layout.verify_email_dialog, null);
         //ButterKnife.bind(this,child);
         cancelDialog = ButterKnife.findById(child, R.id.dialog_cancel);
         alertDialogBuilder.setView(child);

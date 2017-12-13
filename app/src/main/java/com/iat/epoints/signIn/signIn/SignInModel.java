@@ -23,9 +23,5 @@ public class SignInModel implements SignInActivityMVP.Model
         repository.saveUser(new User(email,password));
     }
 
-    @Override
-    public void signInSuccess(String token) {
-
-    }
 
 }

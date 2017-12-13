@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by USER on 11-12-2017.
+ * Created by Manikanta .
  */
 
 public class SignInSucess

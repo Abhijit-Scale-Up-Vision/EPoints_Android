@@ -10,6 +10,7 @@ apply plugin: 'me.tatarka.retrolambda'
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
 }
 
@@ -41,11 +42,15 @@ android {
             buildConfigField "String", "CLIENT_ID", '"bdl"'
             buildConfigField "String", "CLIENT_SECRET", '"bdl_secret"'
             buildConfigField "String", "GRANT_TYPE", '"password"'
+            buildConfigField "String", "FB_GRANT_TYPE",'"http://bigdls.com/auth/facebook"'
+
             buildConfigField "String", "SIGN_UP_API", '"rest/join/init-mobile/{email}/"'
             buildConfigField "String", "SIGN_IN_API", '"oauth/token"'
             buildConfigField "String", "BASE_URL_SIGIN_QA", '"https://qa-oauth.epoints.com/"'
             buildConfigField "String", "BASE_URL_SIGN_UP_QA", '"https://qa.epoints.com/"'
+
             buildConfigField "String", "BASE_URL_SIGN_SUCCESS_QA", '"https://qa.epoints.com/rest/login/loginSuccess"'
+
         }
         release {
             minifyEnabled false
@@ -132,7 +137,7 @@ dependencies {
     compile 'com.mobsandgeeks:android-saripaar:1.0.3'
     //Crashytics
     compile 'com.google.firebase:firebase-crash:11.6.0'
-
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
 
 

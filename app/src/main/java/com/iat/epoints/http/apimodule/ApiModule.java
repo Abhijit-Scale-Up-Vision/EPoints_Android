@@ -1,6 +1,7 @@
 package com.iat.epoints.http.apimodule;
 
 import com.iat.epoints.BuildConfig;
+import com.iat.epoints.http.api.FBLoginAPI;
 import com.iat.epoints.http.api.SignInAPI;
 import com.iat.epoints.http.api.SignUpAPI;
 
@@ -58,4 +59,9 @@ public class ApiModule {
         return provideRetrofit(QA_BASE_URL, provideClientHeader()).create(SignInAPI.class);
     }
 
+    @Provides
+    public FBLoginAPI provideFbLoginApiService()
+    {
+        return provideRetrofit(QA_BASE_URL, provideClientHeader()).create(FBLoginAPI.class);
+    }
 }

@@ -31,22 +31,16 @@ public interface SignInActivityMVP
 
         void removeError();
 
+        void gotoDashBoard(String email,String firstName);
+        void gotoChangePassword();
     }
-
-
     interface Presenter
     {
         void setView(View view);
         void loginButtonClicked();
-
     }
-
-
-
     interface Model
     {
         void signInUser(String email, String password);
-
-        void signInSuccess(String token);
     }
 }
