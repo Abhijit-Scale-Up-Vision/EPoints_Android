@@ -1,5 +1,6 @@
 package com.iat.epoints.landing;
 
+
 /**
  * Created by Abhijit.
  */
@@ -20,5 +21,11 @@ public interface LandingActivityMVP {
         void createAccountEmailButtonClicked();
         void signInButtonClicked();
         void facebookLoginClicked();
+        void getCurrentUser();
+    }
+
+    interface Model{
+        void signUpUser(boolean email, boolean facebook);
+        User getUser();
     }
 }

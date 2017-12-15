@@ -1,14 +1,13 @@
-package com.iat.epoints.signIn.signIn;
-
-import com.iat.epoints.login.signup.User;
+package com.iat.epoints.signin;
 
 /**
- * Created by Manikanta.
+ * Created by Abhijit.
  */
 
 public class MemoryRepository implements SignInRepository {
 
     private User user;
+    private Token token;
 
     @Override
     public User getUser() {
@@ -32,5 +31,23 @@ public class MemoryRepository implements SignInRepository {
 
         this.user = user;
 
+    }
+
+    @Override
+    public Token getAccessToken() {
+        if(token == null) {
+            Token token = new Token("");
+            return token;
+        }else{
+            return token;
+        }
+    }
+
+    @Override
+    public void saveToken(Token token) {
+
+        if(token == null){
+            token = getAccessToken();
+        }
     }
 }

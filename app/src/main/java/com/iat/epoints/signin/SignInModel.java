@@ -1,8 +1,4 @@
-package com.iat.epoints.signIn.signIn;
-
-import android.content.Context;
-
-import com.iat.epoints.login.signup.User;
+package com.iat.epoints.signin;
 
 
 /**
@@ -23,5 +19,21 @@ public class SignInModel implements SignInActivityMVP.Model
         repository.saveUser(new User(email,password));
     }
 
+    @Override
+    public User getUser() {
+        return null;
+    }
+
+    @Override
+    public void getSignAccessToken(String token) {
+
+        repository.saveToken(new Token(token));
+    }
+
+
+    @Override
+    public void signInSuccess(String token) {
+
+    }
 
 }

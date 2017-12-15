@@ -1,4 +1,4 @@
-package com.iat.epoints.login.signup.privacypolicy;
+package com.iat.epoints.signup.privacypolicy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

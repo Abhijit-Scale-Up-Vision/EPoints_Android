@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.google.firebase.crash.FirebaseCrash;
 import com.iat.epoints.R;
 import com.iat.epoints.Utils.BaseActivity;
-import com.iat.epoints.login.signup.SignUpActivityMVP;
+import com.iat.epoints.signup.SignUpActivityMVP;
 import com.iat.epoints.root.App;
 
 import javax.inject.Inject;

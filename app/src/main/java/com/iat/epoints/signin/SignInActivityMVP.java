@@ -1,4 +1,4 @@
-package com.iat.epoints.signIn.signIn;
+package com.iat.epoints.signin;
 
 /**
  * Created by Manikanta.
@@ -10,10 +10,11 @@ public interface SignInActivityMVP
     {
         String getEmail();
         String getPassword();
+        String getToken();
 
         void showInputError();
 
-        void signInSuccess(String token);
+        void signInSuccess(String token,int expTime);
 
         void validationError();
 
@@ -33,14 +34,32 @@ public interface SignInActivityMVP
 
         void gotoDashBoard(String email,String firstName);
         void gotoChangePassword();
+
+        void showUserNotAvailable();
+
+
+        void showUserPasswordIsWrong();
+
+        void showEmailAndPAsswordAreEmpty();
+        void createErrorDialog();
+
     }
     interface Presenter
     {
         void setView(View view);
         void loginButtonClicked();
+        void getCurrentUser();
+
+
     }
     interface Model
     {
         void signInUser(String email, String password);
+
+        User getUser();
+
+        void getSignAccessToken(String token);
+
+        void signInSuccess(String token);
     }
 }

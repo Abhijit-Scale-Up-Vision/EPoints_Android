@@ -1,7 +1,4 @@
-package com.iat.epoints.signIn.signIn;
-
-
-import com.iat.epoints.login.signup.User;
+package com.iat.epoints.signin;
 
 /**
  * Created by Manikanta.
@@ -11,4 +8,6 @@ public interface SignInRepository
 {
     User getUser();
     void saveUser(User user);
+    Token getAccessToken();
+    void saveToken(Token token);
 }

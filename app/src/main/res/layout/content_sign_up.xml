@@ -19,17 +19,18 @@
                 android:hint="@string/text_email"
                 android:layout_marginTop="@dimen/layout_margin"
                 >
-            <EditText
-                android:id="@+id/editText_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/layout_height"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/rounded_edittext"
-                android:singleLine="true"
-                android:fontFamily="@font/system_san_francisco_display_regular"
-                android:paddingLeft="@dimen/hint_padding"
-                android:backgroundTint="@color/color" />
+
+                <EditText
+                    android:id="@+id/editText_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layout_height"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/color"
+                    android:ems="10"
+                    android:fontFamily="@font/system_san_francisco_display_regular"
+                    android:inputType="textCapCharacters|textEmailAddress"
+                    android:paddingLeft="@dimen/hint_padding"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
             <!--app:passwordToggleDrawable - Drawable to use as the password input visibility toggle icon.
             app:passwordToggleTint - Icon to use for the password input visibility toggle.

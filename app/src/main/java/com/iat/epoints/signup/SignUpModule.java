@@ -1,4 +1,4 @@
-package com.iat.epoints.login.signup;
+package com.iat.epoints.signup;
 
 import dagger.Module;
 import dagger.Provides;

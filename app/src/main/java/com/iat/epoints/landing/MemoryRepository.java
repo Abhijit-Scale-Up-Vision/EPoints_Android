@@ -1,6 +1,11 @@
-package com.iat.epoints.login.signup;
+package com.iat.epoints.landing;
 
-public class MemoryRepository implements SignUpRepository {
+
+/**
+ * Created by Abhijit.
+ */
+
+public class MemoryRepository implements LandingRepository {
 
     private User user;
 
@@ -8,8 +13,8 @@ public class MemoryRepository implements SignUpRepository {
     public User getUser() {
 
         if (user == null) {
-            User user = new User("", "", "", "");
-            user.setId(0);
+            User user = new User(false, false);
+
             return user;
         } else {
             return user;
@@ -19,12 +24,12 @@ public class MemoryRepository implements SignUpRepository {
 
     @Override
     public void saveUser(User user) {
-
         if (user == null) {
             user = getUser();
         }
 
         this.user = user;
-
     }
+
+
 }

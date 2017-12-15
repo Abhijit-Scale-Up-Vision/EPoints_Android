@@ -1,4 +1,4 @@
-package com.iat.epoints.login.signup;
+package com.iat.epoints.signup;
 
 public interface SignUpRepository {
 

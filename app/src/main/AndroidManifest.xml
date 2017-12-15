@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.signup.SignUpActivity"
+            android:name=".signup.SignUpActivity"
             android:theme="@style/AppTheme_Custom"
             android:screenOrientation="portrait"/>
         <activity
@@ -32,24 +32,24 @@
             android:label=""
             android:theme="@style/AppTheme_Custom_transparent"
             android:screenOrientation="portrait"/>
-        <activity android:name=".login.signup.privacypolicy.PrivacyPolicyActivity"
+        <activity android:name=".signup.privacypolicy.PrivacyPolicyActivity"
             android:label="Privacy Policy"
             android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".signIn.signIn.SignInActivity"
+            android:name=".signin.SignInActivity"
             android:label="Sign in"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Custom" />
 
         <activity
-            android:name=".signIn.signIn.DashBoardActivity"
+            android:name=".signin.DashBoardActivity"
             android:label="Dash Board"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Custom" />
 
         <activity
-            android:name=".signIn.signIn.ChangePasswordActivity"
+            android:name=".signin.ChangePasswordActivity"
             android:label="Change Password"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Custom" />
@@ -60,6 +60,8 @@
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
+        <service android:name=".service.LoginExpiryService"
+            android:exported="false"/>
 
 
     </application>

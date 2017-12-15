@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_background">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_L"
+        android:textSize="@dimen/textsize"
+        android:text="@string/text_error_email_password"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/system_san_francisco_display_regular"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_Micro"
+        android:background="@android:color/darker_gray"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        android:textSize="@dimen/textsize_S"
+        android:text="@string/text_signIn"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/colorCyan"
+        android:fontFamily="@font/system_san_francisco_display_regular"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_Micro"
+        android:background="@android:color/darker_gray"/>
+    <TextView
+        android:id="@+id/error_dialog_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height"
+        android:textSize="@dimen/textsize_S"
+        android:text="@string/text_cancel"
+        android:gravity="center"
+        android:textColor="@color/colorCyan"
+        android:fontFamily="@font/system_san_francisco_display_regular"/>
+</LinearLayout>

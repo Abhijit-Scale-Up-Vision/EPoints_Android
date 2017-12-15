@@ -11,8 +11,18 @@ import dagger.Provides;
 public class LandingModule {
 
     @Provides
-    public LandingActivityMVP.Presenter provideLandingActivityPresenter(){
-        return new LandingActivityPresenter();
+    public LandingActivityMVP.Presenter provideLandingActivityPresenter(LandingActivityMVP.Model model){
+        return new LandingActivityPresenter(model);
+    }
+
+    @Provides
+    public LandingActivityMVP.Model provideLandingActivityModel(LandingRepository repository){
+        return new LandingModel(repository);
+    }
+
+    @Provides
+    public LandingRepository provideLandingRepository(){
+        return new MemoryRepository();
     }
 
 }

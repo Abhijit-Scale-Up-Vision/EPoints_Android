@@ -1,4 +1,4 @@
-package com.iat.epoints.login.signup;
+package com.iat.epoints.signup;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,7 +34,7 @@ import com.iat.epoints.R;
 import com.iat.epoints.Utils.BaseActivity;
 import com.iat.epoints.http.api.SignUpAPI;
 import com.iat.epoints.http.apimodel.ResultStatus;
-import com.iat.epoints.login.signup.privacypolicy.PrivacyPolicyActivity;
+import com.iat.epoints.signup.privacypolicy.PrivacyPolicyActivity;
 import com.iat.epoints.root.App;
 import com.iat.epoints.thankyou.ThankYouActivity;
 

@@ -1,9 +1,9 @@
-package com.iat.epoints;
+package com.iat.epoints.signup;
 
 
-import com.iat.epoints.login.signup.SignUpActivityMVP;
-import com.iat.epoints.login.signup.SignUpActivityPresenter;
-import com.iat.epoints.login.signup.User;
+import com.iat.epoints.signup.SignUpActivityMVP;
+import com.iat.epoints.signup.SignUpActivityPresenter;
+import com.iat.epoints.signup.User;
 
 import org.junit.Before;
 import org.junit.Test;

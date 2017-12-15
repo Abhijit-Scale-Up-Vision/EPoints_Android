@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".login.signup.SignUpActivity">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+    tools:context=".landing.LandingActivity">
+    <android.support.design.widget.AppBarLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/AppTheme_Custom"
         android:fitsSystemWindows="true"

@@ -2,6 +2,7 @@ package com.iat.epoints.http.apimodule;
 
 import com.iat.epoints.BuildConfig;
 import com.iat.epoints.http.api.FBLoginAPI;
+import com.iat.epoints.http.api.RTokenAPI;
 import com.iat.epoints.http.api.SignInAPI;
 import com.iat.epoints.http.api.SignUpAPI;
 
@@ -17,7 +18,7 @@ public class ApiModule {
 
     public final String BASE_URL = BuildConfig.BASE_URL_SIGN_UP_QA;
     public final String QA_BASE_URL = BuildConfig.BASE_URL_SIGIN_QA;
-    public final String QA_BASE_SUCCESS_SIGN_IN_URL = BuildConfig.BASE_URL_SIGN_SUCCESS_QA;
+    public final String QA_BASE_URL_RTOKEN = BuildConfig.BASE_URL_RTOKEN_QA;
 
     @Provides
     public OkHttpClient provideClient() {
@@ -64,4 +65,11 @@ public class ApiModule {
     {
         return provideRetrofit(QA_BASE_URL, provideClientHeader()).create(FBLoginAPI.class);
     }
+
+    @Provides
+    public RTokenAPI provideRTokenApiService()
+    {
+        return provideRetrofit(QA_BASE_URL_RTOKEN, provideClient()).create(RTokenAPI.class);
+    }
+
 }

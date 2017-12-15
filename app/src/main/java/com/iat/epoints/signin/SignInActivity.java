@@ -1,4 +1,4 @@
-package com.iat.epoints.signIn.signIn;
+package com.iat.epoints.signin;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +28,7 @@ import com.iat.epoints.http.api.SignInAPI;
 import com.iat.epoints.http.apimodel.SignInResult;
 import com.iat.epoints.http.apimodel.SignInSucess;
 import com.iat.epoints.root.App;
+import com.iat.epoints.service.LoginExpiryService;
 
 import java.util.regex.Pattern;
 
@@ -45,32 +46,20 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity implements SignInActivityMVP.View, View.OnClickListener, TextWatcher, View.OnFocusChangeListener
 {
 
-
-    private AlertDialog alertDialog;
-    private TextView cancelDialog;
-
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor mEditor;
-
-
     @Inject
     SignInActivityMVP.Presenter presenter;
     @Inject
     SignInAPI signInAPI;
-
     @BindView(R.id.toolbar_title)
     TextView title;
-
     @BindView(R.id.textview_signin)
     TextView tvSignIn;
-
     @BindView(R.id.textview_forgot_password)
     TextView tvFPassword;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-
     @BindView(R.id.til_email)
     TextInputLayout tilEmail;
     @BindView(R.id.til_password)
@@ -79,8 +68,8 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     EditText email;
     @BindView(R.id.editText_signin_password)
     EditText password;
-
-
+    private AlertDialog alertDialog;
+    private TextView cancelDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,6 +118,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                 alertDialog.dismiss();
                 clearText();
                 break;
+
         }
     }
 
@@ -137,6 +127,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     protected void onResume() {
         super.onResume();
         presenter.setView(this);
+        clearText();
     }
 
     @Override
@@ -145,8 +136,23 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     }
 
     @Override
+    public void setEmail(String email) {
+        this.email.setText(email);
+    }
+
+    @Override
     public String getPassword() {
         return password.getText().toString().trim();
+    }
+
+    @Override
+    public String getToken() {
+        return mSharedPreferences.getString("ACCESS_TOKEN",null);
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password.setText(password);
     }
 
     @Override
@@ -156,7 +162,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     }
 
     @Override
-    public void signInSuccess(String token)
+    public void signInSuccess(String token,int expTime)
     {
 
         retrofit2.Call<SignInSucess> call = signInAPI.signInUserSucess("Bearer "+token);
@@ -180,6 +186,9 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                         String firstName = response.body().getFirstName();
 
                         gotoDashBoard(email,firstName);
+                        Intent serviceIntent = new Intent(SignInActivity.this, LoginExpiryService.class);
+                        serviceIntent.putExtra("expiryTime",expTime);
+                        startService(serviceIntent);
                     }
                 }
                 else if (response.code() == 202)
@@ -204,59 +213,50 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     }
 
     @Override
-    public void setEmail(String email) {
-        this.email.setText(email);
-    }
-
-    @Override
-    public void setPassword(String password) {
-        this.password.setText(password);
-    }
-
-    @Override
     public boolean validate()
     {
         boolean valid = true;
         Pattern pattern;
-
+/*
 
         if (TextUtils.isEmpty(getEmail()))
         {
             tilEmail.setError("You haven’t entered an Email");
         }
 
-        else if (TextUtils.isEmpty(getPassword()))
+        if (TextUtils.isEmpty(getPassword()))
         {
             tilPassword.setError("You haven’t entered a Password");
-        }
-
+        }*/
 
 
         removeError();
-        if (getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
+        if (getEmail().isEmpty() /*|| !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()*/)
+        {
             //email.setError("Please enter valid email address");
-            tilEmail.setError(getString(R.string.text_email_error));
+            tilEmail.setError("You haven’t entered a email");
             valid = false;
         }
-       /*   (?=.*[0-9]) a digit must occur at least once
+         /* (?=.*[0-9]) a digit must occur at least once
             (?=.*[a-z]) a lower case letter must occur at least once
             (?=.*[A-Z]) an upper case letter must occur at least once
             (?=.*[@#$%^&+=]) a special character must occur at least once
             (?=\\S+$) no whitespace allowed in the entire string
-            .{8,} at least 8 characters*/
+            .{8,} at least 8 characters */
+
         String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
-        if (getPassword().isEmpty() || !pattern.matcher(getPassword()).matches()) {
+        if (getPassword().isEmpty() /*|| !pattern.matcher(getPassword()).matches()*/) {
             //password.setError("Please enter valid password");
-            tilPassword.setError(getString(R.string.text_password_error));
+            tilPassword.setError("You haven’t entered a password");
             valid = false;
         }
         return valid;
     }
 
     @Override
-    public void signInUser()
-    {
+    public void signInUser() {
+
         retrofit2.Call<SignInResult> call = signInAPI.signInUser(BuildConfig.GRANT_TYPE,getEmail(),getPassword(), BuildConfig.CLIENT_ID,BuildConfig.CLIENT_SECRET);
         call.enqueue(new Callback<SignInResult>() {
             @Override
@@ -268,7 +268,10 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                     mEditor.putString("ACCESS_TOKEN",response.body().getAccessToken());
                     mEditor.putString("REFRESH_TOKEN",response.body().getRefreshToken());
                     mEditor.commit();
-                    signInSuccess(response.body().getAccessToken());
+
+                    signInSuccess(response.body().getAccessToken(),response.body().getExpiresIn());
+                }else if(response.code() == 400){
+                    createErrorDialog();
                 }
             }
 
@@ -278,10 +281,16 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                 Log.e("Excpetion",""+t);
             }
         });
-
-
-
     }
+
+    /*@Override
+    public void onClick()
+    {
+
+
+
+
+    }*/
 
     @Override
     public void clearText() {
@@ -316,6 +325,37 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
 
         startActivity(new Intent(getApplicationContext(),ChangePasswordActivity.class));
 
+    }
+
+    @Override
+    public void showUserNotAvailable() {
+        Toast.makeText(SignInActivity.this,"No such user",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showUserPasswordIsWrong() {
+        Toast.makeText(SignInActivity.this,"Sorry, that password isn't right",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showEmailAndPAsswordAreEmpty() {
+        Toast.makeText(SignInActivity.this,"You haven’t entered an email or password",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void createErrorDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignInActivity.this);
+
+        View child = getLayoutInflater().inflate(R.layout.create_error_dialog, null);
+        //ButterKnife.bind(this,child);
+        cancelDialog = ButterKnife.findById(child, R.id.error_dialog_cancel);
+        alertDialogBuilder.setView(child);
+
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        alertDialog.show();
+        cancelDialog.setOnClickListener(this);
     }
 
     @Override
@@ -383,3 +423,4 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
 
     }
 }
+

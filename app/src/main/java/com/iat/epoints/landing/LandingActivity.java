@@ -9,27 +9,27 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.crash.FirebaseCrash;
 import com.iat.epoints.BuildConfig;
+
 import com.iat.epoints.R;
 import com.iat.epoints.Utils.BaseActivity;
 import com.iat.epoints.http.api.FBLoginAPI;
-import com.iat.epoints.http.api.SignInAPI;
 import com.iat.epoints.http.apimodel.SignInResult;
 import com.iat.epoints.http.apimodel.SignInSucess;
-import com.iat.epoints.login.signup.SignUpActivity;
 import com.iat.epoints.root.App;
-import com.iat.epoints.signIn.signIn.DashBoardActivity;
-import com.iat.epoints.signIn.signIn.SignInActivity;
+
+import com.iat.epoints.signin.DashBoardActivity;
+
+import com.iat.epoints.signin.SignInActivity;
+import com.iat.epoints.signup.SignUpActivity;
 
 import java.util.Arrays;
 
@@ -40,9 +40,9 @@ import butterknife.ButterKnife;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/*
-        Created by Abajith and Modifiactions done by Manikanta
-*/
+/**
+ * Created by Abhijit.
+ */
 
 public class LandingActivity extends BaseActivity implements LandingActivityMVP.View {
 
@@ -247,7 +247,6 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
         i.putExtra("fName",fName);
         startActivity(i);
 
-
     }
 
     @Override
@@ -255,4 +254,5 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }

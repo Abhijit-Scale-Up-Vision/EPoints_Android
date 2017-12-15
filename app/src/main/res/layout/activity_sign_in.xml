@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/layout_margin"
             android:gravity="center"
-            android:hint="@string/text_email"
+            android:hint="@string/text_enter_email"
             app:errorEnabled="true">
 
             <EditText
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/hint_padding"
             android:gravity="center"
-            android:hint="@string/text_password"
+            android:hint="@string/text_signin_password"
             app:counterTextAppearance="@style/AppTheme_Custom"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true">

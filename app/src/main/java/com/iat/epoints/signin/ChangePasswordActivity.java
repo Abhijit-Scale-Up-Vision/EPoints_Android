@@ -1,4 +1,4 @@
-package com.iat.epoints.signIn.signIn;
+package com.iat.epoints.signin;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
