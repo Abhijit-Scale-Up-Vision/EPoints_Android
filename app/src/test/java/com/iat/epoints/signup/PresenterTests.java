@@ -13,6 +13,10 @@ import static org.mockito.Mockito.when;
 
 import static org.mockito.Mockito.*;
 
+/**
+ * Created by Ramya.
+ */
+
 public class PresenterTests {
 
     SignUpActivityMVP.Model mockLoginModel;
