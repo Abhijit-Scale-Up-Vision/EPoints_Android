@@ -3,8 +3,6 @@ package com.iat.epoints.landing;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -39,11 +37,9 @@ public class PresenterTests {
 
         landingActivityPresenter.setView(landingActivityView);
 
-
     }
 
     @Test
-
     public void whenUserClickOnCreateEmailIdItShouldDirectToSignupScreen(){
 
         when(landingActivityModel.getUser()).thenReturn(user);
@@ -55,10 +51,8 @@ public class PresenterTests {
 
     }
    /* @Test
-
     public void whenUserClickOnCreateEmailIdItShouldDirectToSigninScreen(){
         when(landingActivityModel.getUser()).thenReturn(userSignin);
     }*/
-
 
 }

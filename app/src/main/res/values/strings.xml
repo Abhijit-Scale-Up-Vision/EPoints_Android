@@ -7,7 +7,7 @@
     <string name="text_promoCode">Promo code</string>
     <string name="text_show">SHOW</string>
     <string name="text_createNewAccount">Create new account</string>
-    <string name="text_privacy"><![CDATA[ By creating an account you agree to our <b><font color=#00D264>Privacy Policy</b> and confirm that you read our <b><font color=#00D264> terms and conditions </b>]]></string>
+    <string name="text_privacy">By creating an account you agree to our Privacy Policy and confirm that you read our terms and conditions</string>
     <string name="text_createAccount">Create account</string>
     <string name="text_next">Next</string>
     <string name="text_bycreatingaccount">By creating an account you agree to our</string>
@@ -45,6 +45,8 @@
     <string name="account_verfied">This account is not verified</string>
     <string name="text_privacy1"><![CDATA[ By creating an account you agree to our <b><font color=#00D264>Privacy Policy</b>]]></string>
     <string name="text_toc"><![CDATA[ and confirm that you read our <b><font color=#00D264> terms and conditions </b>]]></string>
+    <string name="text_privacy2">By creating an account you agree to our Privacy Policy</string>
+    <string name="text_toc1">and confirm that you read our terms and conditions</string>
     <string name="text_coming_soon">Coming soon</string>
     <string name="text_enter_email">Enter email</string>
     <string name="text_signin_password">Enter password</string>

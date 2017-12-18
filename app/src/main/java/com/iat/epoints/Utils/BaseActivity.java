@@ -50,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+
     @Nullable public Toolbar getToolbar() {
         return mToolbar;
     }

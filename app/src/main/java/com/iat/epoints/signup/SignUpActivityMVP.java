@@ -1,5 +1,8 @@
 package com.iat.epoints.signup;
 
+import android.text.style.ClickableSpan;
+import android.widget.TextView;
+
 public interface SignUpActivityMVP {
 
     interface View{
@@ -47,6 +50,11 @@ public interface SignUpActivityMVP {
         void gotoPrivacy();
 
         void removeError();
+
+        void gotoTOC();
+
+        void makeLinks(TextView textView, String[] links, ClickableSpan[] clickableSpans);
+
 
     }
 

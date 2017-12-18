@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -101,6 +102,8 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         password.addTextChangedListener(this);
         email.setOnFocusChangeListener(this);
         password.setOnFocusChangeListener(this);
+        tvFPassword.setOnClickListener(this);
+        tvFPassword.setOnClickListener(this);
 
     }
 
@@ -115,6 +118,15 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
 //                Toast.makeText(getApplicationContext(),"Working fine",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.dialog_cancel:
+                alertDialog.dismiss();
+                clearText();
+                break;
+            case R.id.textview_forgot_password:
+                Intent fPasswordIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.epoints.com/forgot"));
+                startActivity(fPasswordIntent);
+                break;
+
+            case R.id.error_dialog_cancel:
                 alertDialog.dismiss();
                 clearText();
                 break;
@@ -282,15 +294,6 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             }
         });
     }
-
-    /*@Override
-    public void onClick()
-    {
-
-
-
-
-    }*/
 
     @Override
     public void clearText() {

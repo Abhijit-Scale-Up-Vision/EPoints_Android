@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -36,6 +37,7 @@ import com.iat.epoints.http.api.SignUpAPI;
 import com.iat.epoints.http.apimodel.ResultStatus;
 import com.iat.epoints.signup.privacypolicy.PrivacyPolicyActivity;
 import com.iat.epoints.root.App;
+import com.iat.epoints.signup.termsconditions.TermsConditionsActivity;
 import com.iat.epoints.thankyou.ThankYouActivity;
 
 import java.util.regex.Pattern;
@@ -102,8 +104,8 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
 
         slideUp();
 
-        privacy.setText(Html.fromHtml(getString(R.string.text_privacy)));
-        //clickableText();
+        //privacy.setText(Html.fromHtml(getString(R.string.text_privacy)));
+        clickableText();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
@@ -135,7 +137,7 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
         password.setOnFocusChangeListener(this);
         firstName.setOnFocusChangeListener(this);
         lastName.setOnFocusChangeListener(this);
-        privacy.setOnClickListener(this);
+        //privacy.setOnClickListener(this);
 
     }
 
@@ -362,7 +364,6 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
 
     @Override
     public void clickableText() {
-        SpannableString privacyString = new SpannableString(getString(R.string.text_privacy1));
 
         ClickableSpan clickableSpanPrivacyString = new ClickableSpan() {
             @Override
@@ -370,42 +371,43 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
                 gotoPrivacy();
             }
         };
-        SpannableString tocString = new SpannableString(getString(R.string.text_toc));
 
         ClickableSpan clickableSpanTocString = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
-                gotoPrivacy();
+                gotoTOC();
             }
         };
 
-        //For Click
-        privacyString.setSpan(clickableSpanPrivacyString,startIndex,lastIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        makeLinks(privacy, new String[] { "Privacy Policy", "terms and conditions" }, new ClickableSpan[] {
+                clickableSpanPrivacyString, clickableSpanTocString
+        });
+    }
 
-        //For UnderLine
-        privacyString.setSpan(new UnderlineSpan(),startIndex,lastIndex,0);
+    @Override
+    public void makeLinks(TextView textView, String[] links, ClickableSpan[] clickableSpans) {
+        SpannableString spannableString = new SpannableString(textView.getText());
+        for (int i = 0; i < links.length; i++) {
+            ClickableSpan clickableSpan = clickableSpans[i];
+            String link = links[i];
 
-        //For Bold
-        privacyString.setSpan(new StyleSpan(Typeface.BOLD),startIndex,lastIndex,0);
-
-        //For Click
-        tocString.setSpan(clickableSpanTocString,startIndex2,lastIndex2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        //For UnderLine
-        tocString.setSpan(new UnderlineSpan(),startIndex2,lastIndex2,0);
-
-        //For Bold
-        tocString.setSpan(new StyleSpan(Typeface.BOLD),startIndex2,lastIndex2,0);
-
-        //Finally you can set to textView.
-
-        privacy.setText(privacyString +""+tocString);
-        privacy.setMovementMethod(LinkMovementMethod.getInstance());
+            int startIndexOfLink = textView.getText().toString().indexOf(link);
+            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(spannableString, TextView.BufferType.SPANNABLE);
     }
 
     @Override
     public void gotoPrivacy() {
         Intent intent = new Intent(SignUpActivity.this, PrivacyPolicyActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void gotoTOC() {
+        Intent intent = new Intent(SignUpActivity.this, TermsConditionsActivity.class);
         startActivity(intent);
     }
 
@@ -486,13 +488,13 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
     public void onClick(View v) {
         switch (v.getId()){
 
-            case R.id.textview_privacy:
+           /* case R.id.textview_privacy:
                 gotoPrivacy();
-                return;
+                break;*/
             case R.id.dialog_cancel:
                 alertDialog.dismiss();
                 clearText();
-                return;
+                break;
         }
     }
 }

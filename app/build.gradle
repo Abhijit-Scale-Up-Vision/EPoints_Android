@@ -42,9 +42,9 @@ android {
             buildConfigField "String", "CLIENT_ID", '"bdl"'
             buildConfigField "String", "CLIENT_SECRET", '"bdl_secret"'
             buildConfigField "String", "GRANT_TYPE", '"password"'
-            buildConfigField "String", "FB_GRANT_TYPE",'"http://bigdls.com/auth/facebook"'
+            buildConfigField "String", "FB_GRANT_TYPE", '"http://bigdls.com/auth/facebook"'
 
-            buildConfigField "String","RTOKEN",'"refresh_token"'
+            buildConfigField "String", "RTOKEN", '"refresh_token"'
 
             buildConfigField "String", "SIGN_UP_API", '"rest/join/init-mobile/{email}/"'
             buildConfigField "String", "SIGN_IN_API", '"oauth/token"'
@@ -144,6 +144,7 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:11.6.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
+
 
 
 
