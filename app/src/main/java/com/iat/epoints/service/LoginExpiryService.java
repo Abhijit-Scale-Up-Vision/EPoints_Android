@@ -39,8 +39,7 @@ public class LoginExpiryService extends IntentService
 
     int expTime,cSec,eTimeCallSec;
     boolean val = false;
-    public static final int notify = 10000;  //interval between two services(Here Service run every 5 seconds)
-    int count = 0;  //number of times service is display
+    public static final int notify = 9000;  //interval between two services(Here Service run every 5 seconds)
     private Handler mHandler = new Handler();   //run on another Thread to avoid crash
     private Timer mTimer = null;    //timer handling
 
@@ -61,6 +60,8 @@ public class LoginExpiryService extends IntentService
         ((App) getApplication()).getComponent().inject(LoginExpiryService.this);
         mSharedPreferences = getSharedPreferences("epointsPrefFile",MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
+
+
         if (mTimer != null)
             mTimer.cancel();
         else
@@ -68,14 +69,14 @@ public class LoginExpiryService extends IntentService
     }
 
     @Override
-    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
-
-        expTime      = intent.getIntExtra("expiryTime",0);
+    public int onStartCommand(@Nullable Intent intent, int flags, int startId)
+    {
         cSec        = (int) System.currentTimeMillis();
 
-        Log.i("CTime ::",""+cSec);
+        expTime      = intent.getIntExtra("expiryTime",0);
 
-        eTimeCallSec = cSec + 10*1000;
+
+        eTimeCallSec = cSec + 5*1000;
         val = true;
         mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, notify);  //Schedule task
         return START_STICKY;
@@ -96,13 +97,9 @@ public class LoginExpiryService extends IntentService
                     if (val == true)
                     {
                         int cSecs        = (int) System.currentTimeMillis();
-                        Log.i("Current Sec",""+cSecs);
-                        Log.i("Exp Time",""+eTimeCallSec);
                         if (cSecs > eTimeCallSec)
                         {
                             val = false;
-
-
 
                             if (mSharedPreferences !=null)
                             {
@@ -176,6 +173,4 @@ public class LoginExpiryService extends IntentService
         }
 
     }
-
-
 }

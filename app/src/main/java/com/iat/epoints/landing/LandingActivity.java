@@ -1,6 +1,7 @@
 package com.iat.epoints.landing;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.iat.epoints.http.apimodel.SignInResult;
 import com.iat.epoints.http.apimodel.SignInSucess;
 import com.iat.epoints.root.App;
 
+import com.iat.epoints.service.LoginExpiryService;
 import com.iat.epoints.signin.DashBoardActivity;
 
 import com.iat.epoints.signin.SignInActivity;
@@ -45,6 +47,9 @@ import retrofit2.Response;
  */
 
 public class LandingActivity extends BaseActivity implements LandingActivityMVP.View {
+
+    SharedPreferences mSharedPreferences;
+    SharedPreferences.Editor mEditor;
 
     @BindView(R.id.button_create_account_email)
     Button buttonCreateAccountEmail;
@@ -79,6 +84,10 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
         setContentView(R.layout.activity_landing);
         FirebaseCrash.report(new Exception());
         ((App) getApplication()).getComponent().inject(this);
+
+        mSharedPreferences = getSharedPreferences("epointsPrefFile",MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
+
 
         ButterKnife.bind(this);
         toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
@@ -149,7 +158,6 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
     {
         login_button.performClick();
         login_button.setReadPermissions(Arrays.asList("public_profile", "email"));
-        Toast.makeText(getApplicationContext(),"Done",Toast.LENGTH_SHORT).show();
         mCallbackManager = CallbackManager.Factory.create();
 
 
@@ -172,7 +180,11 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
                             if (response.code() == 200)
                             {
                                 Log.i("Response One",""+response.body().getAccessToken() +"\n"+response.body().getRefreshToken());
-                                signInSuccess(response.body().getAccessToken());
+
+                                mEditor.putString("ACCESS_TOKEN",response.body().getAccessToken());
+                                mEditor.putString("REFRESH_TOKEN",response.body().getRefreshToken());
+                                mEditor.commit();
+                                signInSuccess(response.body().getAccessToken(),response.body().getExpiresIn());
                             }
                         }
 
@@ -205,7 +217,7 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
     }
 
     @Override
-    public void signInSuccess(String token) {
+    public void signInSuccess(String token,int expTime) {
 
         retrofit2.Call<SignInSucess> call = fbLoginAPI.signInUserSucess("Bearer "+token);
         call.enqueue(new Callback<SignInSucess>() {
@@ -217,11 +229,17 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
                 {
                     boolean verifiedVal = response.body().getVerified();
 
+                    Log.i("Verified val",""+verifiedVal);
+
                     if (verifiedVal == true)
                     {
                         String email = response.body().getEmail();
                         String firstName = response.body().getFirstName();
                         gotoDashBoard(email,firstName);
+
+                        Intent serviceIntent = new Intent(LandingActivity.this, LoginExpiryService.class);
+                        serviceIntent.putExtra("expiryTime",expTime);
+                        startService(serviceIntent);
 
                     }
                 }
@@ -254,5 +272,4 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 }

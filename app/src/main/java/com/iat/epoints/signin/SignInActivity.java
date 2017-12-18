@@ -3,6 +3,7 @@ package com.iat.epoints.signin;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -72,6 +73,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     private AlertDialog alertDialog;
     private TextView cancelDialog;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +82,6 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
 
         ((App) getApplication()).getComponent().inject(SignInActivity.this);
         ButterKnife.bind(this);
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
@@ -97,6 +98,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         });
 
         tvSignIn.setOnClickListener(this);
+        tvFPassword.setOnClickListener(this);
 
         email.addTextChangedListener(this);
         password.addTextChangedListener(this);
@@ -113,10 +115,9 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         switch (v.getId())
         {
             case R.id.textview_signin:
-
                 presenter.loginButtonClicked();
-//                Toast.makeText(getApplicationContext(),"Working fine",Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.dialog_cancel:
                 alertDialog.dismiss();
                 clearText();
@@ -131,10 +132,9 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                 clearText();
                 break;
 
+
         }
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -229,17 +229,6 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     {
         boolean valid = true;
         Pattern pattern;
-/*
-
-        if (TextUtils.isEmpty(getEmail()))
-        {
-            tilEmail.setError("You haven’t entered an Email");
-        }
-
-        if (TextUtils.isEmpty(getPassword()))
-        {
-            tilPassword.setError("You haven’t entered a Password");
-        }*/
 
 
         removeError();
@@ -263,6 +252,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             tilPassword.setError("You haven’t entered a password");
             valid = false;
         }
+
         return valid;
     }
 
