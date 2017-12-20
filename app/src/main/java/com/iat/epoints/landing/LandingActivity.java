@@ -42,7 +42,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by Abhijit.
+ * Created by Abhijit .
  */
 
 public class LandingActivity extends BaseActivity implements LandingActivityMVP.View {
