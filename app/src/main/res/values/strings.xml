@@ -54,7 +54,7 @@
     <string name="text_signin_show">show</string>
     <string name="text_signin">Sign in</string>
     <string name="text_forget_password">Forgot your password?</string>
-    <string name="text_error_email_password">Invalid Email and Password</string>
+    <string name="text_error_email_password">Invalid Email / Password</string>
 
     <string name="facebook_app_id">722083627987716</string>
     <string name="fb_login_protocol_scheme">fb722083627987716</string>

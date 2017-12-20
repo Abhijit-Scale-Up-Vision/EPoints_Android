@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.iat.epoints.R;
@@ -30,6 +31,14 @@ public class DashBoardActivity extends AppCompatActivity
             toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
         }
         tvTitle = findViewById(R.id.toolbar_title);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         tvTitle.setText("DashBoard");
         tvName = findViewById(R.id.tvName);
