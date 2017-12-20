@@ -9,18 +9,25 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme_Custom" >
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_gravity="center"
-            android:textSize="@dimen/textsize_MM"
-            android:fontFamily="@font/good_karma_regular"
-            android:textColor="@color/colorwhite"/>
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/hint_padding_XL"
+                android:text="@string/text_createAccount"
+                android:textSize="@dimen/textsize_MM"
+                android:fontFamily="@font/good_karma_upright"
+                android:textColor="@color/colorwhite"/>
+
+
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

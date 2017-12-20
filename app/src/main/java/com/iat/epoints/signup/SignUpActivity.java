@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -50,14 +51,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
+import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
 public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.View, TextWatcher, View.OnFocusChangeListener, View.OnClickListener {
 
-    private int startIndex = 32;
-    private int lastIndex = 44;
-    private int startIndex2 = 24;
-    private int lastIndex2 = 40;
     private AlertDialog alertDialog;
     private TextView cancelDialog;
+    private boolean visible = false;
 
     @Inject
     SignUpActivityMVP.Presenter presenter;
@@ -80,6 +82,8 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
     TextView title;
     @BindView(R.id.textview_privacy)
     TextView privacy;
+    @BindView(R.id.toggle_button)
+    TextView toggleButton;
     @BindView(R.id.til_email)
     TextInputLayout tilEmail;
     @BindView(R.id.til_password)
@@ -90,6 +94,7 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
     TextInputLayout tilLastName;
     @BindView(R.id.linearLayout_signUp)
     LinearLayout linearLayoutSignUp;
+
     /*@BindView(R.id.dialog_cancel)
     TextView cancel;*/
 
@@ -104,7 +109,7 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
 
         slideUp();
 
-        //privacy.setText(Html.fromHtml(getString(R.string.text_privacy)));
+        privacy.setText(Html.fromHtml(getString(R.string.text_privacy)));
         clickableText();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -137,6 +142,7 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
         password.setOnFocusChangeListener(this);
         firstName.setOnFocusChangeListener(this);
         lastName.setOnFocusChangeListener(this);
+        toggleButton.setOnClickListener(this);
         //privacy.setOnClickListener(this);
 
     }
@@ -227,9 +233,9 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
         Pattern pattern;
 
         removeError();
-        if (getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
+        if (getEmail().isEmpty()/* || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()*/) {
             //email.setError("Please enter valid email address");
-            tilEmail.setError(getString(R.string.text_email_error));
+            tilEmail.setError(getString(R.string.text_email_empty));
             valid = false;
         }
        /*   (?=.*[0-9]) a digit must occur at least once
@@ -238,10 +244,15 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
             (?=.*[@#$%^&+=]) a special character must occur at least once
             (?=\\S+$) no whitespace allowed in the entire string
             .{8,} at least 8 characters*/
-        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
+        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,15}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
-        if (getPassword().isEmpty() || !pattern.matcher(getPassword()).matches()) {
+        if (getPassword().isEmpty() /*|| !pattern.matcher(getPassword()).matches()*/) {
             //password.setError("Please enter valid password");
+            tilPassword.setError(getString(R.string.text_password_empty));
+            valid = false;
+        }else if(!(password.length()>=6 && password.length()<=15))
+        {
+            tilPassword.setErrorEnabled(true);
             tilPassword.setError(getString(R.string.text_password_error));
             valid = false;
         }
@@ -370,12 +381,23 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
             public void onClick(View textView) {
                 gotoPrivacy();
             }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(getResources().getColor(R.color.colorgreen));
+                ds.setUnderlineText(false);
+            }
         };
 
         ClickableSpan clickableSpanTocString = new ClickableSpan() {
             @Override
             public void onClick(View textView) {
                 gotoTOC();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(getResources().getColor(R.color.colorgreen));
+                ds.setUnderlineText(false);
             }
         };
 
@@ -413,9 +435,13 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
 
     @Override
     public void removeError() {
+        tilEmail.setErrorEnabled(false);
         tilEmail.setError(null);
+        tilPassword.setErrorEnabled(false);
         tilPassword.setError(null);
+        tilFirstName.setErrorEnabled(false);
         tilFirstName.setError(null);
+        tilLastName.setErrorEnabled(false);
         tilLastName.setError(null);
     }
 
@@ -431,17 +457,19 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        boolean valid = true;
+
         Pattern pattern;
-        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
+        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,15}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
 
-        if (email.hasFocus()&&(getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches())) {
+        if (email.hasFocus()&&!Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
             //email.setError("Please enter valid email address");
+            tilEmail.setErrorEnabled(true);
             tilEmail.setError(getString(R.string.text_email_error));
-            valid = false;
 
-        }else if(email.hasFocus() && valid){tilEmail.setError(null); /*verifyExistingUser();*/}
+        }else if(email.hasFocus()){
+            tilEmail.setErrorEnabled(false);
+            tilEmail.setError(null); /*verifyExistingUser();*/}
 
        /*   (?=.*[0-9]) a digit must occur at least once
             (?=.*[a-z]) a lower case letter must occur at least once
@@ -450,25 +478,29 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
             (?=\\S+$) no whitespace allowed in the entire string
             .{8,} at least 8 characters*/
 
-        if (password.hasFocus() && (getPassword().isEmpty() || !pattern.matcher(getPassword()).matches())) {
+        if (password.hasFocus() && !(password.length()>=6 && password.length()<=15)) {
             //password.setError("Please enter valid password");
+            tilPassword.setErrorEnabled(true);
             tilPassword.setError(getString(R.string.text_password_error));
-            valid = false;
-        }else if(password.hasFocus() && valid){
+        }else if(password.hasFocus()){
+            tilPassword.setErrorEnabled(false);
             tilPassword.setError(null);
         }
         if (firstName.hasFocus()&&(getFirstName().isEmpty())) {
             //firstName.setError("Please enter firstname");
+            tilFirstName.setErrorEnabled(true);
             tilFirstName.setError(getString(R.string.text_firstName_error));
-            valid = false;
-        }else if(firstName.hasFocus() && valid){
+
+        }else if(firstName.hasFocus()){
+            tilFirstName.setErrorEnabled(false);
             tilFirstName.setError(null);
         }
         if (lastName.hasFocus() && (getLastName().isEmpty())) {
             //lastName.setError("Please enter lastname");
+            tilLastName.setErrorEnabled(true);
             tilLastName.setError(getString(R.string.text_lastName_error));
-            valid = false;
-        }else if(lastName.hasFocus() && valid){
+        }else if(lastName.hasFocus()){
+            tilLastName.setErrorEnabled(false);
             tilLastName.setError(null);
         }
 
@@ -494,6 +526,16 @@ public class SignUpActivity extends BaseActivity implements SignUpActivityMVP.Vi
             case R.id.dialog_cancel:
                 alertDialog.dismiss();
                 clearText();
+                break;
+            case R.id.toggle_button:
+                visible = !visible;
+                if (visible) {
+                    toggleButton.setText(getString(R.string.text_hide));
+                    password.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    toggleButton.setText(getString(R.string.text_show));
+                    password.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                }
                 break;
         }
     }

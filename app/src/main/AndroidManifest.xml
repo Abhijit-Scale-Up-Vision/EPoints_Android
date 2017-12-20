@@ -14,9 +14,8 @@
         android:supportsRtl="true">
         <activity
             android:name=".landing.LandingActivity"
-            android:label=""
             android:screenOrientation="portrait"
-            android:theme="@style/CustomActionBar">
+            android:theme="@style/AppTheme_Custom_transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +28,7 @@
             android:theme="@style/AppTheme_Custom" />
         <activity
             android:name=".thankyou.ThankYouActivity"
-            android:label=""
+            android:label="Thankyou"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Custom_transparent" />
         <activity
@@ -61,10 +60,6 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
-        <service
-            android:name=".service.LoginExpiryService"
-            android:exported="false" />
 
         <activity android:name=".signup.termsconditions.TermsConditionsActivity"
             android:label="Terms &amp; Conditions"

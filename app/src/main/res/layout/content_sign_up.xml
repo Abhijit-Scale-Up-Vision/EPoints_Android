@@ -15,67 +15,84 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:hint="@string/text_email"
+                app:errorEnabled="false"
                 android:layout_marginTop="@dimen/layout_margin"
+                app:hintEnabled="false"
                 >
 
                 <EditText
                     android:id="@+id/editText_email"
+                    android:hint="@string/text_email"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/layout_height"
                     android:background="@drawable/rounded_edittext"
                     android:backgroundTint="@color/color"
                     android:ems="10"
                     android:fontFamily="@font/system_san_francisco_display_regular"
-                    android:inputType="textCapCharacters|textEmailAddress"
+                    android:inputType="textEmailAddress"
                     android:paddingLeft="@dimen/hint_padding"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
             <!--app:passwordToggleDrawable - Drawable to use as the password input visibility toggle icon.
             app:passwordToggleTint - Icon to use for the password input visibility toggle.
             app:passwordToggleTintMode - Blending mode used to apply the background tint.-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/hint_padding">
                 <android.support.design.widget.TextInputLayout
                     android:gravity="center"
                     android:id="@+id/til_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
-                    app:errorEnabled="true"
-                    android:hint="@string/text_password"
+                    app:errorEnabled="false"
+                    app:hintEnabled="false"
+                    app:passwordToggleDrawable="@null"
                     app:counterTextAppearance="@style/AppTheme_Custom"
                     >
-                <EditText
-                    android:gravity="center_vertical"
-                    android:id="@+id/editText_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/layout_height"
-                    android:ems="10"
-                    android:inputType="textPassword"
-
-                    android:paddingLeft="@dimen/hint_padding"
-                    android:singleLine="true"
-                    android:fontFamily="@font/system_san_francisco_display_regular"
-                    android:background="@drawable/rounded_edittext"
-                    android:backgroundTint="@color/color"/>
+                    <EditText
+                        android:gravity="center_vertical"
+                        android:id="@+id/editText_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/layout_height"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:hint="@string/text_password"
+                        android:paddingLeft="@dimen/hint_padding"
+                        android:singleLine="true"
+                        android:fontFamily="@font/system_san_francisco_display_regular"
+                        android:background="@drawable/rounded_edittext"
+                        android:backgroundTint="@color/color"/>
                 </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:id="@+id/toggle_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/layout_height"
+                    android:layout_gravity="right|top"
+                    android:text="@string/text_show"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/hint_padding"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorgreen" />
+            </FrameLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_firstName"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:hint="@string/text_firstName">
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                android:layout_marginTop="@dimen/hint_padding">
 
             <EditText
                 android:id="@+id/editText_firstName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_height"
                 android:inputType="textPersonName"
-
+                android:hint="@string/text_firstName"
                 android:background="@drawable/rounded_edittext"
-
                 android:fontFamily="@font/system_san_francisco_display_regular"
                 android:singleLine="true"
                 android:maxLength="50"
@@ -88,16 +105,15 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                android:hint="@string/text_lastName"
-                >
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                android:layout_marginTop="@dimen/hint_padding">
             <EditText
                 android:id="@+id/editText_lastName"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layout_height"
                 android:inputType="textPersonName"
-
-
+                android:hint="@string/text_lastName"
                 android:maxLength="50"
                 android:background="@drawable/rounded_edittext"
                 android:singleLine="true"
@@ -123,7 +139,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/text_privacy"
                 android:fontFamily="@font/system_san_francisco_display_regular"
                 android:layout_marginTop="@dimen/layout_margin"
                 android:textColorLink="@color/colorgreen"

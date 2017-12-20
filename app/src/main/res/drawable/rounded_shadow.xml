@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape>
+        <!-- set the shadow color here -->
+        <stroke
+            android:width="2.5dp"
+            android:color="@android:color/darker_gray" />
+
+        <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
+
+        <!--Set shadow width as per your requirement -->
+        <padding
+            android:bottom="4dp"
+            android:left="4dp"
+            android:right="4dp"
+            android:top="4dp" />
+
+        <corners android:radius="2dp" />
+    </shape>
+</selector>

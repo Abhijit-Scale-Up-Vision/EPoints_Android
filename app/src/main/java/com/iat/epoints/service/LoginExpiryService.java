@@ -1,23 +1,17 @@
 package com.iat.epoints.service;
 
-import android.app.IntentService;
+import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
+import android.os.CountDownTimer;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.iat.epoints.BuildConfig;
 import com.iat.epoints.http.api.RTokenAPI;
-import com.iat.epoints.http.api.SignInAPI;
 import com.iat.epoints.http.apimodel.SignInResult;
 import com.iat.epoints.root.App;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -28,7 +22,7 @@ import retrofit2.Response;
  * Created by Manikanta.
  */
 
-public class LoginExpiryService extends IntentService
+public class LoginExpiryService extends Service
 {
 
     SharedPreferences mSharedPreferences;
@@ -37,80 +31,62 @@ public class LoginExpiryService extends IntentService
     @Inject
     RTokenAPI rTokenAPI;
 
-    int expTime,cSec,eTimeCallSec;
-    boolean val = false;
-    public static final int notify = 10000;  //interval between two services(Here Service run every 5 seconds)
-    int count = 0;  //number of times service is display
-    private Handler mHandler = new Handler();   //run on another Thread to avoid crash
-    private Timer mTimer = null;    //timer handling
-
-
-    public LoginExpiryService() {
-        super("LoginExpiryService");
-    }
-
-    @Override
-    protected void onHandleIntent(@Nullable Intent intent)
-    {
-    }
+    public static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
 
         ((App) getApplication()).getComponent().inject(LoginExpiryService.this);
         mSharedPreferences = getSharedPreferences("epointsPrefFile",MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
-        if (mTimer != null)
-            mTimer.cancel();
-        else
-            mTimer = new Timer();
+
     }
 
     @Override
-    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+    public int onStartCommand(@Nullable Intent intent, int flags, int startId)
+    {
+        if (intent!=null)
+        {
+            int expTime      = intent.getIntExtra("expiryTime",0);
+            countTimer(expTime);
+        }
 
-        expTime      = intent.getIntExtra("expiryTime",0);
-        cSec        = (int) System.currentTimeMillis();
 
-        Log.i("CTime ::",""+cSec);
-
-        eTimeCallSec = cSec + 10*1000;
-        val = true;
-        mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, notify);  //Schedule task
         return START_STICKY;
     }
 
-
-    //class TimeDisplay for handling task
-    class TimeDisplay extends TimerTask {
-        @Override
-        public void run()
+    private void countTimer(int expTime)
+    {
+        new CountDownTimer(expTime,1000)
         {
-            // run on another thread
-            mHandler.post(new Runnable()
+            @Override
+            public void onTick(long millisUntilFinished)
             {
-                @Override
-                public void run()
-                {
-                    if (val == true)
-                    {
-                        int cSecs        = (int) System.currentTimeMillis();
-                        Log.i("Current Sec",""+cSecs);
-                        Log.i("Exp Time",""+eTimeCallSec);
-                        if (cSecs > eTimeCallSec)
-                        {
-                            val = false;
+                long mSecRemaining = millisUntilFinished / 1000;
+                Log.i("mSec Remaining",""+mSecRemaining);
+            }
 
+            @Override
+            public void onFinish()
+            {
+                Log.i("TimeUp","Done");
+                refreshToken();
+            }
+        }.start();
 
+    }
 
-                            if (mSharedPreferences !=null)
-                            {
-                                String rToken = mSharedPreferences.getString("REFRESH_TOKEN","");
-                                Log.i("Refresh Token",""+rToken);
+    private void refreshToken()
+    {
+        if (mSharedPreferences !=null)
+        {
+            String rToken = mSharedPreferences.getString("REFRESH_TOKEN","");
+            Log.i("Refresh Token",""+rToken);
 
-                                if (rToken !=null)
-                                {
+            if (rToken !=null)
+            {
                                     /*
 
                                     https://qa-oauth.epoints.com/oauth/token?
@@ -131,51 +107,62 @@ public class LoginExpiryService extends IntentService
                                     */
 
 
-                                    retrofit2.Call<SignInResult> call = rTokenAPI.signInRefreshToken("bdl","bdl_secret","refresh_token",rToken);
-                                    call.enqueue(new Callback<SignInResult>() {
-                                        @Override
-                                        public void onResponse(retrofit2.Call<SignInResult> call, Response<SignInResult> response)
-                                        {
-                                            Log.i("Response From Server",""+response.code());
+                retrofit2.Call<SignInResult> call = rTokenAPI.signInRefreshToken("bdl","bdl_secret","refresh_token",rToken);
+                call.enqueue(new Callback<SignInResult>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<SignInResult> call, Response<SignInResult> response)
+                    {
+                        Log.i("Response From Server",""+response.code());
 
-                                            String  aToken = response.body().getAccessToken();
-                                            String  rToken = response.body().getRefreshToken();
-                                            Integer eIn    = response.body().getExpiresIn();
+                        String  aToken = response.body().getAccessToken();
+                        String  rToken = response.body().getRefreshToken();
+                        Integer eIn    = response.body().getExpiresIn();
 
-                                            Log.i("aToken in Service",""+aToken);
-                                            Log.i("rToken in Service",""+rToken);
-                                            Log.i("eIn in Service",""+eIn);
+                        Log.i("aToken in Service",""+aToken);
+                        Log.i("rToken in Service",""+rToken);
+                        Log.i("eIn in Service",""+eIn);
 
-                                            mEditor.putString("ACCESS_TOKEN",response.body().getAccessToken());
-                                            mEditor.putString("REFRESH_TOKEN",response.body().getRefreshToken());
-                                            mEditor.putInt("EXPIRY_TIME",response.body().getExpiresIn());
-                                            mEditor.commit();
+                        mEditor.putString("ACCESS_TOKEN",response.body().getAccessToken());
+                        mEditor.putString("REFRESH_TOKEN",response.body().getRefreshToken());
+                        mEditor.putInt("EXPIRY_TIME",response.body().getExpiresIn());
+                        mEditor.commit();
 
-                                            val = true;
-                                            mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, notify);  //Schedule task
-                                        }
-
-                                        @Override
-                                        public void onFailure(retrofit2.Call<SignInResult> call, Throwable t)
-                                        {
-                                            Log.e("Excpetion",""+t);
-                                        }
-                                    });
-
-
-                                }
-                            }
+                        countTimer(eIn);
 
 
 
-                        }
                     }
-                }
-            });
 
+                    @Override
+                    public void onFailure(retrofit2.Call<SignInResult> call, Throwable t)
+                    {
+                        Log.e("Excpetion",""+t);
+                    }
+                });
+
+
+            }
         }
-
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+/*
+        if (LoginExpiryService.class != null) {
+            Service service = (Service) LoginExpiryService.context;
+            service.stopSelf();
+        }
+*/
+    }
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent)
+    {
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

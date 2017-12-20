@@ -13,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
@@ -40,12 +39,19 @@ import butterknife.ButterKnife;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD;
+import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
 /**
  * Created by Manikanta.
  */
 
 public class SignInActivity extends AppCompatActivity implements SignInActivityMVP.View, View.OnClickListener, TextWatcher, View.OnFocusChangeListener
 {
+    private boolean visible = false;
+    private AlertDialog alertDialog;
+    private TextView cancelDialog;
 
     SharedPreferences mSharedPreferences;
     SharedPreferences.Editor mEditor;
@@ -69,8 +75,8 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     EditText email;
     @BindView(R.id.editText_signin_password)
     EditText password;
-    private AlertDialog alertDialog;
-    private TextView cancelDialog;
+    @BindView(R.id.toggle_button)
+    TextView toggleButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +110,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         password.setOnFocusChangeListener(this);
         tvFPassword.setOnClickListener(this);
         tvFPassword.setOnClickListener(this);
+        toggleButton.setOnClickListener(this);
 
     }
 
@@ -129,6 +136,16 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             case R.id.error_dialog_cancel:
                 alertDialog.dismiss();
                 clearText();
+                break;
+            case R.id.toggle_button:
+                visible = !visible;
+                if (visible) {
+                    toggleButton.setText(getString(R.string.text_hide));
+                    password.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                } else {
+                    toggleButton.setText(getString(R.string.text_show));
+                    password.setInputType(TYPE_CLASS_TEXT | TYPE_TEXT_VARIATION_PASSWORD);
+                }
                 break;
 
         }
@@ -246,7 +263,8 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         if (getEmail().isEmpty() /*|| !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()*/)
         {
             //email.setError("Please enter valid email address");
-            tilEmail.setError("You haven’t entered a email");
+            tilEmail.setErrorEnabled(true);
+            tilEmail.setError(getString(R.string.text_email_empty));
             valid = false;
         }
          /* (?=.*[0-9]) a digit must occur at least once
@@ -260,7 +278,13 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         pattern = Pattern.compile(PASSWORD_PATTERN);
         if (getPassword().isEmpty() /*|| !pattern.matcher(getPassword()).matches()*/) {
             //password.setError("Please enter valid password");
-            tilPassword.setError("You haven’t entered a password");
+            tilPassword.setErrorEnabled(true);
+            tilPassword.setError(getString(R.string.text_password_empty));
+            valid = false;
+        }else if(!(password.length()>=6 && password.length()<=15))
+        {
+            tilPassword.setErrorEnabled(true);
+            tilPassword.setError(getString(R.string.text_password_error));
             valid = false;
         }
         return valid;
@@ -307,7 +331,9 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
 
     @Override
     public void removeError() {
+        tilEmail.setErrorEnabled(false);
         tilEmail.setError(null);
+        tilPassword.setErrorEnabled(false);
         tilPassword.setError(null);
     }
 
@@ -386,18 +412,21 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count)
     {
-
         boolean valid = true;
         Pattern pattern;
-        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
+        String PASSWORD_PATTERN  = "^{6,15}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
 
-        if (email.hasFocus()&&(getEmail().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches())) {
+        if (email.hasFocus() && !Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches()) {
             //email.setError("Please enter valid email address");
+            tilEmail.setErrorEnabled(true);
             tilEmail.setError(getString(R.string.text_email_error));
             valid = false;
 
-        }else if(email.hasFocus() && valid){tilEmail.setError(null); /*verifyExistingUser();*/}
+        }else if(email.hasFocus() && valid){
+            tilEmail.setErrorEnabled(false);
+            tilEmail.setError(null);
+            /*verifyExistingUser();*/}
 
        /*   (?=.*[0-9]) a digit must occur at least once
             (?=.*[a-z]) a lower case letter must occur at least once
@@ -406,11 +435,15 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             (?=\\S+$) no whitespace allowed in the entire string
             .{8,} at least 8 characters*/
 
-        if (password.hasFocus() && (getPassword().isEmpty() || !pattern.matcher(getPassword()).matches())) {
+        /*if (password.hasFocus() && !pattern.matcher(getPassword()).matches()) {*/
+        if (password.hasFocus() && !(password.length()>=6 && password.length()<=15)) {
             //password.setError("Please enter valid password");
-            tilPassword.setError(getString(R.string.text_password_error));
             valid = false;
+            tilPassword.setErrorEnabled(true);
+            tilPassword.setError(getString(R.string.text_password_error));
+
         }else if(password.hasFocus() && valid){
+            tilPassword.setErrorEnabled(false);
             tilPassword.setError(null);
         }
 

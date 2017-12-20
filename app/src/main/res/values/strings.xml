@@ -2,10 +2,11 @@
     <string name="app_name">EPoints</string>
     <string name="text_email">Create an account with email</string>
     <string name="text_password">Set up password</string>
+    <string name="text_password_signin">Enter password</string>
     <string name="text_firstName">First name</string>
     <string name="text_lastName">Last name</string>
     <string name="text_promoCode">Promo code</string>
-    <string name="text_show">SHOW</string>
+    <string name="text_show">Show</string>
     <string name="text_createNewAccount">Create new account</string>
     <string name="text_privacy">By creating an account you agree to our Privacy Policy and confirm that you read our terms and conditions</string>
     <string name="text_createAccount">Create account</string>
@@ -19,7 +20,7 @@
     <string name="text_points">points</string>
     <string name="text_50epoints">Sign up today and have</string>
     <string name="text_50epoints1">50 epoints on us!</string>
-    <string name="text_first_reward">You can get your first reward from as little </string>
+    <string name="text_first_reward">You can get your first reward from as little \n as just 250 epoints.</string>
     <string name="text_250epoints">as just 250 epoints.</string>
     <string name="text_create_email">Create an account with email</string>
     <string name="text_account_facebook">Continue with Facebook</string>
@@ -36,7 +37,7 @@
 
     <string name="resend_link">Resend verification link</string>
     <string name="text_email_error">Invalid email address(abc@xyz.com)</string>
-    <string name="text_password_error">Invalid password(Abc@$#123,Min=8,Max=15)</string>
+    <string name="text_password_error">Password must be between 6-15 characters</string>
     <string name="text_firstName_error">Please enter firstname</string>
     <string name="text_lastName_error">Please enter lastname</string>
     <string name="text_cancel">Cancel</string>
@@ -57,5 +58,8 @@
 
     <string name="facebook_app_id">722083627987716</string>
     <string name="fb_login_protocol_scheme">fb722083627987716</string>
+    <string name="text_hide">Hide</string>
+    <string name="text_email_empty">You haven’t entered a email</string>
+    <string name="text_password_empty">You haven’t entered a password</string>
 
 </resources>

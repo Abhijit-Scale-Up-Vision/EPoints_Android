@@ -12,7 +12,7 @@ public interface LandingActivityMVP {
         void gotoSignIn();
         void gotoFBLogin();
 
-        void signInSuccess(String token);
+        void signInSuccess(String token,int eTime);
         void gotoDashBoard(String email,String fName);
     }
     interface Presenter{

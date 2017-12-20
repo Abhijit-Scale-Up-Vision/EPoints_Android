@@ -1,0 +1,98 @@
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorgray"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/layout_margin"
+        android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:gravity="center"
+        app:errorEnabled="false"
+        app:hintEnabled="false">
+
+        <EditText
+            android:id="@+id/editText_signin_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_height"
+            android:background="@drawable/rounded_edittext"
+            android:backgroundTint="@color/color"
+            android:ems="10"
+            android:hint="@string/text_enter_email"
+            android:fontFamily="@font/system_san_francisco_display_regular"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="@dimen/hint_padding"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hint_padding">
+            <android.support.design.widget.TextInputLayout
+                android:gravity="center"
+                android:id="@+id/til_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                app:passwordToggleDrawable="@null"
+                app:counterTextAppearance="@style/AppTheme_Custom"
+                >
+                <EditText
+                    android:gravity="center_vertical"
+                    android:id="@+id/editText_signin_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layout_height"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="@string/text_password"
+                    android:paddingLeft="@dimen/hint_padding"
+                    android:singleLine="true"
+                    android:fontFamily="@font/system_san_francisco_display_regular"
+                    android:background="@drawable/rounded_edittext"
+                    android:backgroundTint="@color/color"/>
+            </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:id="@+id/toggle_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/layout_height"
+                android:layout_gravity="right|top"
+                android:text="@string/text_show"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/hint_padding"
+                android:textAllCaps="false"
+                android:textColor="@color/colorgreen" />
+        </FrameLayout>
+
+    <TextView
+        android:id="@+id/textview_signin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/hint_padding"
+        android:background="@drawable/rectangle_button"
+        android:gravity="center"
+        android:padding="@dimen/hint_padding"
+        android:text="@string/text_signIn"
+        android:textColor="@color/colorwhite"
+        android:textSize="@dimen/textsizeS" />
+
+    <TextView
+        android:id="@+id/textview_forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/textsizeS"
+        android:gravity="center"
+        android:text="@string/text_forget_password"
+        android:textColor="@color/colorgreen"
+        android:textSize="@dimen/textsizeS" />
+    </LinearLayout>
+</LinearLayout>

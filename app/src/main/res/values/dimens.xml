@@ -6,7 +6,7 @@
     <dimen name="layout_weight">40dp</dimen>
     <dimen name="layout_margin_XXXL">120dp</dimen>
     <dimen name="layout_margin_XXL_M">100dp</dimen>
-    <dimen name="layout_margin_XXL">80dp</dimen>
+    <dimen name="layout_margin_XXL">100dp</dimen>
     <dimen name="layout_margin_XL_M">60dp</dimen>
     <dimen name="layout_margin_XL">40dp</dimen>
     <dimen name="layout_margin_L">20dp</dimen>
@@ -14,6 +14,7 @@
     <dimen name="layout_margin_S">12dp</dimen>
     <dimen name="hint_padding">10dp</dimen>
     <dimen name="hint_padding_L">20dp</dimen>
+    <dimen name="hint_padding_XL">60dp</dimen>
     <dimen name="textsizeS">17sp</dimen>
     <dimen name="textsize">20sp</dimen>
     <dimen name="textsize_M">22sp</dimen>

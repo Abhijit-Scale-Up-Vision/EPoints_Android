@@ -26,6 +26,7 @@ import com.iat.epoints.http.apimodel.SignInResult;
 import com.iat.epoints.http.apimodel.SignInSucess;
 import com.iat.epoints.root.App;
 
+import com.iat.epoints.service.LoginExpiryService;
 import com.iat.epoints.signin.DashBoardActivity;
 
 import com.iat.epoints.signin.SignInActivity;
@@ -45,6 +46,8 @@ import retrofit2.Response;
  */
 
 public class LandingActivity extends BaseActivity implements LandingActivityMVP.View {
+
+    private Intent serviceIntent;
 
     @BindView(R.id.button_create_account_email)
     Button buttonCreateAccountEmail;
@@ -82,6 +85,7 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
 
         ButterKnife.bind(this);
         toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         toobarTitle.setText(getString(R.string.text_signIn));
@@ -172,7 +176,7 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
                             if (response.code() == 200)
                             {
                                 Log.i("Response One",""+response.body().getAccessToken() +"\n"+response.body().getRefreshToken());
-                                signInSuccess(response.body().getAccessToken());
+                                signInSuccess(response.body().getAccessToken(), response.body().getExpiresIn());
                             }
                         }
 
@@ -205,7 +209,7 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
     }
 
     @Override
-    public void signInSuccess(String token) {
+    public void signInSuccess(String token, int expTime) {
 
         retrofit2.Call<SignInSucess> call = fbLoginAPI.signInUserSucess("Bearer "+token);
         call.enqueue(new Callback<SignInSucess>() {
@@ -223,6 +227,9 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
                         String firstName = response.body().getFirstName();
                         gotoDashBoard(email,firstName);
 
+                        serviceIntent = new Intent(LandingActivity.this, LoginExpiryService.class);
+                        serviceIntent.putExtra("expiryTime",expTime);
+                        startService(serviceIntent);
                     }
                 }
                 else if (response.code() == 202)
