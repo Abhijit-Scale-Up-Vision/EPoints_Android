@@ -22,7 +22,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginRight="@dimen/hint_padding_XL"
-                android:text="@string/text_createAccount"
+                android:text="@string/create_new_password"
                 android:textSize="@dimen/textsize_MM"
                 android:fontFamily="@font/good_karma_upright"
                 android:textColor="@color/colorwhite"/>

@@ -47,7 +47,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Custom" />
         <activity
-            android:name=".signin.ChangePasswordActivity"
+            android:name=".changePassword.ChangePasswordActivity"
             android:label="Change Password"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme_Custom" />
@@ -66,5 +66,4 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat"></activity>
     </application>
-
 </manifest>

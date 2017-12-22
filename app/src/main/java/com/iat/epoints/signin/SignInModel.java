@@ -31,9 +31,6 @@ public class SignInModel implements SignInActivityMVP.Model
     }
 
 
-    @Override
-    public void signInSuccess(String token) {
 
-    }
 
 }

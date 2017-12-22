@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,8 +56,14 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
     @BindView(R.id.button_continue_facebook)
     Button btnFacebookContinue;
 
+
+
     @BindView(R.id.login_button)
     LoginButton login_button;
+
+
+    @BindView(R.id.ivLeftIcon)
+    ImageView ivLeftIcon;
 
 
     @Inject
@@ -84,7 +91,7 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
         ((App) getApplication()).getComponent().inject(this);
 
         ButterKnife.bind(this);
-        toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
+//        toolbar.setNavigationIcon(R.drawable.ic_action_left_chevron);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -100,6 +107,14 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
             }
         });
 
+        ivLeftIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+
         btnFacebookContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,12 +122,7 @@ public class LandingActivity extends BaseActivity implements LandingActivityMVP.
                 presenter.facebookLoginClicked();
             }
         });
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         toobarTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

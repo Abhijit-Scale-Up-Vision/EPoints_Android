@@ -54,12 +54,24 @@
     <string name="text_signin_show">show</string>
     <string name="text_signin">Sign in</string>
     <string name="text_forget_password">Forgot your password?</string>
-    <string name="text_error_email_password">Invalid Email / Password</string>
-
+    <string name="text_error_email_password">Your email or password is wrong</string>
     <string name="facebook_app_id">722083627987716</string>
     <string name="fb_login_protocol_scheme">fb722083627987716</string>
     <string name="text_hide">Hide</string>
     <string name="text_email_empty">You haven’t entered a email</string>
     <string name="text_password_empty">You haven’t entered a password</string>
+
+
+
+
+    <!--change Password-->
+
+    <string name="new_password">New password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="change_password">Change password</string>
+    <string name="create_new_password">Create new password</string>
+    <string name="text_description_for_cpassword">Your employer has created a default password for you.
+         Choose a memorable  password of you choice now to secure your account.</string>
+
 
 </resources>

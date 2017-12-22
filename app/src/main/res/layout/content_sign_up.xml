@@ -126,7 +126,8 @@
             <Button
                 android:id="@+id/button_createNewAccount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/layout_height"
+                android:textSize="@dimen/textsizeS"
                 android:text="@string/text_createNewAccount"
                 android:textColor="@color/cardview_light_background"
                 android:layout_marginTop="@dimen/layout_margin"
@@ -139,6 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="#999999"
                 android:fontFamily="@font/system_san_francisco_display_regular"
                 android:layout_marginTop="@dimen/layout_margin"
                 android:textColorLink="@color/colorgreen"

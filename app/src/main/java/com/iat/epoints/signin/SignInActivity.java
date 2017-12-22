@@ -3,7 +3,6 @@ package com.iat.epoints.signin;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -25,6 +24,7 @@ import android.widget.Toast;
 import com.google.firebase.crash.FirebaseCrash;
 import com.iat.epoints.BuildConfig;
 import com.iat.epoints.R;
+import com.iat.epoints.changePassword.ChangePasswordActivity;
 import com.iat.epoints.http.api.SignInAPI;
 import com.iat.epoints.http.apimodel.SignInResult;
 import com.iat.epoints.http.apimodel.SignInSucess;
@@ -130,8 +130,12 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
                 clearText();
                 break;
             case R.id.textview_forgot_password:
-                Intent fPasswordIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.epoints.com/forgot"));
-                startActivity(fPasswordIntent);
+
+//                Intent fPasswordIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.epoints.com/forgot"));
+//                startActivity(fPasswordIntent);
+
+                startActivity(new Intent(getApplicationContext(),ChangePasswordActivity.class));
+
                 break;
 
             case R.id.error_dialog_cancel:
@@ -184,11 +188,6 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
         this.password.setText(password);
     }
 
-    @Override
-    public void showInputError() {
-        Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-
-    }
 
     @Override
     public void signInSuccess(String token,int expTime)
@@ -256,6 +255,14 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             tilEmail.setError(getString(R.string.text_email_empty));
             valid = false;
         }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches())
+        {
+            tilEmail.setErrorEnabled(true);
+            tilEmail.setError(getString(R.string.text_email_error));
+            valid = false;
+
+        }
+
          /* (?=.*[0-9]) a digit must occur at least once
             (?=.*[a-z]) a lower case letter must occur at least once
             (?=.*[A-Z]) an upper case letter must occur at least once
@@ -263,17 +270,12 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             (?=\\S+$) no whitespace allowed in the entire string
             .{8,} at least 8 characters */
 
-        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
+//        String PASSWORD_PATTERN  = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,15}$";
+//        pattern = Pattern.compile(PASSWORD_PATTERN);
         if (getPassword().isEmpty() /*|| !pattern.matcher(getPassword()).matches()*/) {
             //password.setError("Please enter valid password");
             tilPassword.setErrorEnabled(true);
             tilPassword.setError(getString(R.string.text_password_empty));
-            valid = false;
-        }else if(!(password.length()>=6 && password.length()<=15))
-        {
-            tilPassword.setErrorEnabled(true);
-            tilPassword.setError(getString(R.string.text_password_error));
             valid = false;
         }
 
@@ -418,6 +420,10 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             tilEmail.setError(null);
             /*verifyExistingUser();*/}
 
+        if(password.hasFocus() && valid){
+            tilPassword.setErrorEnabled(false);
+            tilPassword.setError(null);
+        }
        /*   (?=.*[0-9]) a digit must occur at least once
             (?=.*[a-z]) a lower case letter must occur at least once
             (?=.*[A-Z]) an upper case letter must occur at least once
@@ -426,16 +432,16 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityM
             .{8,} at least 8 characters*/
 
         /*if (password.hasFocus() && !pattern.matcher(getPassword()).matches()) {*/
-        if (password.hasFocus() && !(password.length()>=6 && password.length()<=15)) {
+      /*  if (password.hasFocus() && !(password.length()>=6 && password.length()<=15)) {
             //password.setError("Please enter valid password");
             valid = false;
             tilPassword.setErrorEnabled(true);
-            tilPassword.setError(getString(R.string.text_password_error));
+            tilPassword.setError(getString(R.string.text_password_empty));
 
         }else if(password.hasFocus() && valid){
             tilPassword.setErrorEnabled(false);
             tilPassword.setError(null);
-        }
+        }*/
 
     }
 

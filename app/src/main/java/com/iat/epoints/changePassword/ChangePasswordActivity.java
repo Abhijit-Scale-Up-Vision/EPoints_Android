@@ -1,4 +1,4 @@
-package com.iat.epoints.signin;
+package com.iat.epoints.changePassword;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,5 +16,7 @@ public class ChangePasswordActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changepassword);
+
+
     }
 }

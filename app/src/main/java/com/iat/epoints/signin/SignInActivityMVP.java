@@ -12,7 +12,6 @@ public interface SignInActivityMVP
         String getPassword();
         String getToken();
 
-        void showInputError();
 
         void signInSuccess(String token,int expTime);
 
@@ -55,11 +54,8 @@ public interface SignInActivityMVP
     interface Model
     {
         void signInUser(String email, String password);
-
         User getUser();
-
         void getSignAccessToken(String token);
 
-        void signInSuccess(String token);
     }
 }

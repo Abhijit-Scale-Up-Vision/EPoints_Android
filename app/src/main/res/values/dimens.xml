@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="layout_height_Micro">0.1dp</dimen>
-    <dimen name="layout_height">40dp</dimen>
+    <dimen name="layout_height">48dp</dimen>
     <dimen name="layout_height_L">50dp</dimen>
     <dimen name="layout_weight">40dp</dimen>
     <dimen name="layout_margin_XXXL">120dp</dimen>
@@ -10,12 +10,15 @@
     <dimen name="layout_margin_XL_M">60dp</dimen>
     <dimen name="layout_margin_XL">40dp</dimen>
     <dimen name="layout_margin_L">20dp</dimen>
-    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
+    <dimen name="layout_margin_top">5dp</dimen>
+
     <dimen name="layout_margin_S">12dp</dimen>
     <dimen name="hint_padding">10dp</dimen>
     <dimen name="hint_padding_L">20dp</dimen>
     <dimen name="hint_padding_XL">60dp</dimen>
-    <dimen name="textsizeS">17sp</dimen>
+    <dimen name="textsizeS">16sp</dimen>
+    <dimen name="textsize_show">13sp</dimen>
     <dimen name="textsize">20sp</dimen>
     <dimen name="textsize_M">22sp</dimen>
     <dimen name="textsize_MM">28sp</dimen>
@@ -27,4 +30,10 @@
     <dimen name="textsize_XS">13sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="image_width">100dp</dimen>
+
+    <dimen name="spark_image_width">48dp</dimen>
+    <dimen name="spark_image_height">160dp</dimen>
+
+
+    <dimen name="text_size_landing_sign_in">17sp</dimen>
 </resources>

@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-    android:layout_marginTop="@dimen/layout_margin_L"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    android:layout_marginTop="@dimen/layout_margin_L"
     android:background="@android:color/transparent"
-    app:popupTheme="@style/CustomActionBar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:popupTheme="@style/CustomActionBar">
+
+    <ImageView
+        android:id="@+id/ivLeftIcon"
+        android:layout_height="32dp"
+        android:layout_width="32dp"
+        android:src="@drawable/ellipse_three"
+        android:background="@drawable/back"/>
+
     <TextView
-        android:layout_marginEnd="@dimen/layout_margin"
         android:id="@+id/toolbar_title"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/layout_margin"
+        android:layout_marginRight="@dimen/layout_margin"
         android:textAllCaps="false"
-        android:textColor="@color/colorwhite"
-        android:layout_marginRight="@dimen/layout_margin" />
+        android:textSize="@dimen/text_size_landing_sign_in"
+        android:textColor="@color/colorwhite" />
 </android.support.v7.widget.Toolbar>
